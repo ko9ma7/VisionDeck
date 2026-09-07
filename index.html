@@ -1,208 +1,293 @@
 <!doctype html>
-<html lang="ko" data-theme="light">
+<html lang="ko">
 <head>
-  <meta charset="UTF-8" />
+  <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <meta name="description" content="문서 하나를 여러 Vision/OCR AI로 동시에 분석하고 결과·속도·비용을 비교해 가장 좋은 결과를 고르는 VisionDeck." />
-  <meta name="theme-color" content="#f7f9fc" />
-  <meta name="color-scheme" content="light dark" />
-  <title>VisionDeck — 문서 하나, 여러 AI, 가장 좋은 결과</title>
-  <link rel="canonical" href="__SITE_URL__" />
+  <meta name="theme-color" content="#0b0f18" />
+  <meta name="color-scheme" content="dark" />
+  <title>MotionFrame Studio v9 — URL 챕터를 이해하고 임팩트 데모를 자동 연출하는 AI Storyboard</title>
+  <meta name="description" content="여러 URL과 hash 뷰포인트를 입력 순서대로 이해하고, 각 화면에서 핵심 제목·제품 UI·버튼만 골라 클릭과 전환이 이어지는 임팩트 제품 데모를 자동 구성합니다." />
+  <link rel="canonical" href="__SITE_URL__/" />
   <link rel="icon" href="./favicon.svg" type="image/svg+xml" />
+  <link rel="icon" href="./favicon-32x32.png" sizes="32x32" type="image/png" />
+  <link rel="icon" href="./favicon-16x16.png" sizes="16x16" type="image/png" />
   <link rel="apple-touch-icon" href="./apple-touch-icon.png" />
   <link rel="manifest" href="./manifest.webmanifest" />
-  <link rel="stylesheet" href="./src/styles.css" />
-
+  <meta property="og:title" content="MotionFrame Studio v9 — URL 챕터를 이해하고 임팩트 데모를 자동 연출하는 AI Storyboard" />
+  <meta property="og:description" content="URL 순서를 챕터로 해석하는 AI Storyboard, 강한 Punch·Spotlight·Page Impact 모션, 사운드와 WebM 렌더링." />
   <meta property="og:type" content="website" />
-  <meta property="og:site_name" content="VisionDeck" />
-  <meta property="og:title" content="VisionDeck — 문서 하나, 여러 AI, 가장 좋은 결과" />
-  <meta property="og:description" content="PDF·사진·스크린샷을 여러 OCR/Vision AI로 동시에 읽고 결과를 나란히 비교합니다." />
-  <meta property="og:url" content="__SITE_URL__" />
-  <meta property="og:image" content="__SITE_URL__og-image.png" />
+  <meta property="og:url" content="__SITE_URL__/" />
+  <meta property="og:image" content="__SITE_URL__/og-image.png" />
+  <meta property="og:site_name" content="MotionFrame Studio" />
   <meta name="twitter:card" content="summary_large_image" />
-  <meta name="twitter:title" content="VisionDeck — AI 문서 비교 워크벤치" />
-  <meta name="twitter:description" content="파일을 넣고, 분석 목적을 고르고, 여러 AI 결과 중 가장 좋은 것을 선택하세요." />
-  <meta name="twitter:image" content="__SITE_URL__og-image.png" />
-  <script type="application/ld+json">{"@context":"https://schema.org","@type":"SoftwareApplication","name":"VisionDeck","applicationCategory":"BusinessApplication","operatingSystem":"Web","description":"Compare OCR and vision AI results for documents and images."}</script>
+  <meta name="twitter:title" content="MotionFrame Studio" />
+  <meta name="twitter:description" content="페이지 제목·섹션·메뉴·CTA의 실제 위치를 읽어 기본 연출 흐름을 만들고, 링크별 동작을 수정한 뒤 WebM으로 내보내세요." />
+  <meta name="twitter:image" content="__SITE_URL__/og-image.png" />
+  <link rel="stylesheet" href="./assets/styles.css?v=9.0.0" />
+  <script type="application/ld+json">{"@context":"https://schema.org","@type":"SoftwareApplication","name":"MotionFrame Studio","applicationCategory":"MultimediaApplication","operatingSystem":"Web","url":"__SITE_URL__/","description":"사이트 URL의 실제 DOM 좌표와 링크 관계를 분석해 페이지 이동까지 포함한 기본 연출안을 만들고 WebM으로 렌더링하는 브라우저 Auto Director."}</script>
 </head>
 <body>
-  <div class="app-shell">
-    <header class="topbar">
-      <a class="brand" href="#" aria-label="VisionDeck 홈">
-        <span class="brand-mark" aria-hidden="true">
-          <svg viewBox="0 0 44 44"><rect x="4" y="5" width="36" height="34" rx="10"/><path d="M13 15h18M13 22h18M13 29h10"/><circle cx="30" cy="29" r="4.5"/><path d="m33.2 32.2 4 4"/></svg>
-        </span>
-        <span><strong>VisionDeck</strong><small>문서 하나 · 여러 AI · 가장 좋은 결과</small></span>
-      </a>
-      <nav class="header-actions" aria-label="전역 메뉴">
-        <button class="ghost-button" id="guideButton">사용 방법</button>
-        <button class="icon-button" id="themeButton" aria-label="테마 전환" title="테마 전환">
-          <svg viewBox="0 0 24 24"><path d="M12 3v2m0 14v2M3 12h2m14 0h2M5.6 5.6 7 7m10 10 1.4 1.4M18.4 5.6 17 7M7 17l-1.4 1.4"/><circle cx="12" cy="12" r="4"/></svg>
-        </button>
-        <button class="outline-button" id="settingsButton"><span class="status-dot"></span> 실제 AI 연결</button>
-      </nav>
-    </header>
+  <a class="skip-link" href="#studio">편집기로 바로 이동</a>
 
-    <main>
-      <section class="intro-strip" aria-labelledby="introTitle">
-        <div>
-          <h1 id="introTitle">파일을 한 번 넣고, 여러 AI 결과를 비교해서 <em>가장 좋은 결과</em>를 고릅니다.</h1>
-          <p>OCR, 표 추출, 문서 정보 추출, 이미지 설명을 모델별로 나란히 비교합니다. 처음이라면 아래 4단계만 따라가면 됩니다.</p>
+  <header class="topbar">
+    <a class="brand" href="#top" aria-label="MotionFrame Studio 홈">
+      <span class="brand-symbol" aria-hidden="true"><span></span></span>
+      <span class="brand-copy"><strong>MotionFrame</strong><small>Studio</small></span>
+    </a>
+    <nav class="desktop-nav" aria-label="주요 메뉴">
+      <a href="#capture">URL 분석</a>
+      <a href="#director">Auto Director</a>
+      <a href="#templates">모션 스타일</a>
+      <a href="#studio">편집기</a>
+    </nav>
+    <div class="top-actions">
+      <button class="ghost-button" id="projectExportButton" type="button">프로젝트 백업</button>
+      <button class="menu-button" id="menuButton" type="button" aria-expanded="false" aria-controls="mobileNav" aria-label="메뉴 열기">
+        <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 7h16M4 12h16M4 17h16" /></svg>
+      </button>
+    </div>
+  </header>
+  <nav class="mobile-nav" id="mobileNav" hidden aria-label="모바일 메뉴">
+    <a href="#capture">URL 분석</a><a href="#director">Auto Director</a><a href="#templates">모션 스타일</a><a href="#studio">편집기</a>
+    <button id="mobileProjectExportButton" type="button">프로젝트 백업</button>
+  </nav>
+
+  <main id="top">
+    <section class="hero">
+      <div class="hero-copy">
+        <p class="hero-kicker">URL → DIRECT → MOTION → SOUND → WEBM</p>
+        <h1>사이트를 넣고,<br />연출을 고르고,<br />영상으로 끝냅니다.</h1>
+        <p>페이지의 실제 제목·제품 화면·기능 섹션·메뉴·CTA 위치와 링크 관계를 읽고, 전체 화면 → 핵심 포인트 → 커서 클릭 → 다음 페이지 진입이 자연스럽게 이어지는 기본 스토리보드를 먼저 만듭니다. 각 샷에는 이동 뒤 잠시 정착해 읽을 시간을 주고, 마지막에 사운드와 함께 WebM으로 내보냅니다.</p>
+        <div class="hero-actions">
+          <a class="primary-button" href="#capture">URL로 시작하기</a>
+          <a class="secondary-button" href="#templates">템플릿 보기</a>
         </div>
-        <div class="mode-chip" id="modeChip"><span></span> Demo mode</div>
-      </section>
+        <div class="hero-meta"><span>GitHub Pages</span><span>브라우저 렌더링</span><span>로컬 프로젝트 저장</span></div>
+      </div>
+      <div class="hero-demo" aria-hidden="true">
+        <div class="hero-browser">
+          <div class="browser-bar"><i></i><i></i><i></i><span>your-product.com</span></div>
+          <div class="demo-page"><div class="demo-nav"></div><div class="demo-hero"></div><div class="demo-grid"><b></b><b></b><b></b></div><div class="demo-table"></div></div>
+          <span class="demo-focus"></span><span class="demo-cursor"></span>
+        </div>
+        <div class="demo-strip"><span>01 Overview</span><span>02 Focus</span><span>03 Click</span><span>04 Outro</span></div>
+      </div>
+    </section>
 
-      <ol class="stepper" aria-label="VisionDeck 사용 순서">
-        <li class="is-active" data-step="1"><b>1</b><span><strong>파일 넣기</strong><small>PDF · 사진 · Screenshot</small></span></li>
-        <li data-step="2"><b>2</b><span><strong>무엇을 할지 선택</strong><small>OCR · 표 · 문서 · Vision</small></span></li>
-        <li data-step="3"><b>3</b><span><strong>AI 비교 실행</strong><small>최대 4개 모델</small></span></li>
-        <li data-step="4"><b>4</b><span><strong>결과 선택·내보내기</strong><small>JSON · CSV</small></span></li>
-      </ol>
-
-      <section class="workspace" id="workspace">
-        <aside class="file-panel">
-          <div class="panel-heading">
-            <div><span class="step-label">STEP 1</span><h2>분석할 파일</h2></div>
-            <button class="text-button" id="resetButton" hidden>처음부터</button>
+    <section class="capture-section" id="capture" aria-labelledby="capture-title">
+      <div class="section-head">
+        <div><p class="eyebrow">CAPTURE + STRUCTURE</p><h2 id="capture-title">URL을 넣으면 화면과 페이지 구조를 함께 읽습니다.</h2></div>
+        <p>캡처 이미지만 쓰지 않습니다. 페이지 제목, 주요 헤딩, 제품 미리보기, CTA/버튼과 링크 위치를 함께 분석해 장면의 목적과 순서를 자동 구성합니다.</p>
+      </div>
+      <div class="capture-card">
+        <div class="url-builder">
+          <label for="urlInput">사이트 URL</label>
+          <div class="url-row">
+            <textarea id="urlInput" rows="3" placeholder="https://example.com
+https://example.com/features
+https://example.com/pricing" autocomplete="url" inputmode="url" aria-describedby="captureHelper"></textarea>
+            <button class="primary-button" id="urlStoryButton" type="button">Auto Director로 쇼릴 만들기</button>
           </div>
-
-          <label class="dropzone" id="dropzone" for="fileInput">
-            <input id="fileInput" type="file" accept="image/*,.pdf,video/*" hidden />
-            <span class="drop-icon"><svg viewBox="0 0 24 24"><path d="M12 16V4m0 0L8 8m4-4 4 4M5 14v5h14v-5"/></svg></span>
-            <strong>파일을 여기에 끌어놓으세요</strong>
-            <span>또는 클릭해서 선택 · PDF / Image / Screenshot / Video</span>
-            <span class="drop-cta">파일 선택</span>
-          </label>
-
-          <button class="sample-button" id="sampleButton">
-            <img src="./sample-receipt.svg" alt="샘플 영수증 미리보기" />
-            <span><strong>처음이라면 예제로 시작</strong><small>한국어 영수증 샘플로 30초 만에 전체 흐름 확인</small></span>
-            <svg viewBox="0 0 24 24"><path d="m9 18 6-6-6-6"/></svg>
-          </button>
-
-          <div class="file-meta" id="fileMeta" hidden>
-            <div class="file-type-icon" id="fileTypeIcon">IMG</div>
-            <div><strong id="fileName">sample-receipt.png</strong><small id="fileInfo">Sample · receipt</small></div>
-            <span class="success-mark">✓</span>
+          <div class="capture-options capture-options-v6">
+            <label><span>캡처 방식</span><select id="captureModeSelect"><option value="story" selected>AI 쇼릴 · URL별 뷰포인트</option><option value="full">전체 페이지 한 장</option><option value="viewport">현재 뷰포트</option></select></label>
+            <label><span>뷰포트</span><select id="viewportSelect"><option value="1440x1000">Desktop · 1440</option><option value="1024x768">Laptop · 1024</option><option value="768x1024">Tablet · 768</option><option value="390x844">Mobile · 390</option></select></label>
+            <label><span>모션 스타일</span><select id="captureTemplateSelect"></select></label>
           </div>
-
-          <div class="privacy-box">
-            <strong>파일은 언제 외부로 전송되나요?</strong>
-            <p>Demo에서는 브라우저 안에서만 미리봅니다. “실제 AI 연결”을 켰을 때만 설정한 Gateway로 요청합니다.</p>
+          <fieldset class="analysis-scope-card">
+            <legend>분석 범위 · 먼저 여기까지만 정합니다</legend>
+            <div class="analysis-scope-grid">
+              <label><span>페이지 범위</span><select id="analysisPageLimitSelect"><option value="1">현재 URL 1개</option><option value="3">자동 탐색 최대 3개</option><option value="5" selected>입력 URL 우선 · 최대 5개</option></select></label>
+              <label><span>페이지당 요소</span><select id="analysisElementLimitSelect"><option value="6" selected>AI 추천 6개</option><option value="10">확장 10개</option><option value="12">상세 12개</option></select></label>
+              <label><span>위치 묶음 단위</span><select id="analysisBandSelect"><option value="screen" selected>한 화면 단위</option><option value="section">섹션 단위</option><option value="element">요소 단위</option></select></label>
+            </div>
+            <div class="analysis-role-checks" role="group" aria-label="분석할 요소 종류">
+              <label><input type="checkbox" data-analysis-role="headings" checked /><span>제목·섹션</span></label>
+              <label><input type="checkbox" data-analysis-role="media" checked /><span>제품 화면·미디어</span></label>
+              <label><input type="checkbox" data-analysis-role="navigation" checked /><span>메뉴·링크</span></label>
+              <label><input type="checkbox" data-analysis-role="actions" checked /><span>버튼·CTA</span></label>
+              <label><input type="checkbox" data-analysis-role="brand" /><span>브랜드·로고</span></label>
+            </div>
+            <p>여러 URL을 입력하면 그 순서 자체를 스토리 순서로 사용합니다. 같은 문서의 hash URL은 동일 페이지를 반복 분석하지 않고, 해당 위치에서 보여줄 챕터로 취급합니다.</p>
+          </fieldset>
+          <label class="auto-follow-line"><input id="autoFollowInput" type="checkbox" checked /><span><strong>내부 링크를 페이지 범위까지 자동 분석</strong><small>위에서 정한 1/3/5페이지 한도 안에서 기능·제품·가격·데모 링크를 우선 따라갑니다.</small></span></label>
+          <div class="capture-actions">
+            <button class="ghost-button" id="useExampleUrlButton" type="button">예제 URL 넣기</button>
+            <button class="secondary-button" id="urlSingleButton" type="button">장면 1개로 추가</button>
+            <button class="secondary-button" id="screenCaptureButton" type="button">현재 화면 한 장</button>
+            <button class="secondary-button" id="screenRecordButton" type="button">화면 녹화 클립</button>
+            <button class="secondary-button" id="imageUploadButton" type="button">이미지·영상 추가</button>
+            <input id="imageInput" type="file" accept="image/png,image/jpeg,image/webp,image/gif,video/webm,video/mp4" multiple hidden />
           </div>
+          <p class="helper" id="captureHelper">URL은 한 줄에 하나씩 입력하며 입력 순서가 영상의 챕터 순서가 됩니다. Ctrl/⌘ + Enter로 바로 쇼릴을 만들 수 있습니다. Microlink 브라우저에서 제목·헤딩·메뉴·버튼·링크의 실제 화면 좌표와 href를 함께 읽습니다. 다음 페이지와 연결되는 링크가 있으면 커서 이동 → 클릭 → 다음 페이지 진입까지 기본 연출안에 자동 연결합니다.</p>
+          <div class="dom-analysis" id="domAnalysis" hidden><strong>페이지 구조 분석</strong><div id="domAnalysisChips"></div></div>
+        </div>
+        <div class="capture-status" id="captureStatus" role="status" aria-live="polite">
+          <span class="status-dot"></span><div><strong>준비됨</strong><p>URL을 입력하거나 기존 화면을 가져와 시작하세요.</p></div>
+        </div>
+      </div>
+    </section>
+
+
+    <section class="director-section" id="director" aria-labelledby="director-title">
+      <div class="section-head director-head">
+        <div><p class="eyebrow">AUTO DIRECTOR · FLOW PLAN</p><h2 id="director-title">AI가 URL 순서를 챕터로 보고, 핵심 장면만 골라 임팩트 있는 데모 흐름으로 압축합니다.</h2><p class="section-subcopy">같은 문서의 #capture · #templates · #studio는 중복 페이지가 아니라 각각의 의도된 뷰포인트로 처리합니다. 각 챕터에서 제목·제품/UI 표면·행동 버튼을 2~4개만 선택하고, 클릭이 다음 URL을 여는 원인이 되도록 자동 연결합니다.</p></div>
+        <div class="director-head-actions"><span id="directorSummary">0 pages · 0 beats</span><button class="secondary-button" id="rebuildDirectorButton" type="button">분석 범위 다시 적용</button><button class="primary-button" id="applyDirectorButton" type="button">플로우를 영상으로 적용</button></div>
+      </div>
+      <div class="analysis-workspace">
+        <div class="analysis-workspace-head">
+          <div><strong>AI 추천 스토리보드</strong><span>입력한 URL 순서를 유지하고, 각 뷰포인트에서 영상에 필요한 핵심 요소만 보여줍니다. 필요하면 체크를 바꿔 다시 구성할 수 있습니다.</span></div>
+          <button class="secondary-button" id="rebuildFromSelectionButton" type="button">선택으로 스토리 다시 만들기</button>
+        </div>
+        <div id="analysisPageList" class="analysis-page-list"></div>
+      </div>
+      <div class="director-plan-panel director-plan-full">
+        <div class="director-panel-title"><div><strong>2. 연출 Flow</strong><span>체크한 요소와 실제 링크 목적지를 연결한 최종 영상 순서입니다.</span></div><span class="director-impact-badge">POSITION → FLOW</span></div>
+        <div class="director-flow" id="directorFlow"></div>
+      </div>
+      <div id="directorLibrary" hidden></div>
+      <p class="director-note" id="directorNote">AI Expert 기본 문법: 입력 URL = 챕터 → 챕터당 핵심 2~4개 → H1 Punch → 제품/UI Spotlight → 다음 URL을 가리키는 버튼 Cursor Click → Page Impact → 다음 챕터 Slam → 마지막 Resolve. 같은 문서의 hash URL도 각각 독립적인 뷰포인트 장면으로 캡처합니다.</p>
+    </section>
+
+    <section class="templates-section" id="templates" aria-labelledby="templates-title">
+      <div class="section-head">
+        <div><p class="eyebrow">MOTION PRESETS · 24 BUILT-IN</p><h2 id="templates-title">모션 템플릿은 자동 연출안의 움직임 스타일만 바꿉니다.</h2><p class="section-subcopy">Auto Director가 무엇을 보여줄지 정한 뒤, 여기서는 빠르게/차분하게/스크롤 중심처럼 카메라 톤만 선택합니다. 콘텐츠 순서와 페이지 연결 기준은 유지됩니다.</p></div>
+        <div class="template-head-actions">
+          <button class="secondary-button" id="saveTemplateButton" type="button">현재 연출 저장</button>
+          <button class="secondary-button" id="importTemplateButton" type="button">템플릿 가져오기</button>
+          <input id="templateFileInput" type="file" accept="application/json,.json" hidden />
+        </div>
+      </div>
+      <div class="template-toolbar">
+        <label class="template-search"><span class="sr-only">템플릿 검색</span><input id="templateSearchInput" type="search" placeholder="예: scroll, cursor, dashboard, mobile" autocomplete="off" /></label>
+        <strong id="templateResultCount">24개 연출</strong>
+      </div>
+      <div class="template-filters" id="templateFilters" role="group" aria-label="템플릿 필터"></div>
+      <div class="template-grid" id="templateGrid" aria-live="polite"></div>
+    </section>
+
+    <section class="studio-section" id="studio" aria-labelledby="studio-title">
+      <div class="section-head studio-title-row">
+        <div><p class="eyebrow">EDITOR</p><h2 id="studio-title">장면, 움직임, 사운드를 한 화면에서 조절합니다.</h2></div>
+        <div class="project-meta"><span id="sceneSummary">0 scenes</span><span id="durationSummary">0.0 sec</span><span id="saveState">로컬 저장</span></div>
+      </div>
+
+      <div class="studio-toolbar">
+        <div class="toolbar-group">
+          <label>화면 비율<select id="aspectSelect"><option value="16:9">16:9</option><option value="9:16">9:16</option><option value="1:1">1:1</option></select></label>
+          <label>프레임<select id="frameStyleSelect"><option value="browser">Browser</option><option value="floating">Floating</option><option value="none">None</option></select></label>
+          <label>해상도<select id="resolutionSelect"><option value="1280x720">720p</option><option value="1920x1080">1080p</option></select></label>
+        </div>
+        <div class="toolbar-actions">
+          <button class="secondary-button" id="projectImportButton" type="button">프로젝트 불러오기</button>
+          <input id="projectFileInput" type="file" accept="application/json,.json" hidden />
+          <button class="danger-button" id="resetButton" type="button">초기화</button>
+        </div>
+      </div>
+
+      <div class="editor-layout">
+        <aside class="left-rail panel">
+          <div class="panel-title"><div><p class="eyebrow">SCENES</p><h3>장면</h3></div><span id="sceneCountBadge">0</span></div>
+          <div class="scene-list" id="sceneList"></div>
+          <div class="scene-empty" id="sceneEmpty" hidden><strong>장면이 없습니다.</strong><p>URL 캡처, 화면 캡처 또는 이미지 추가로 시작하세요.</p></div>
+          <div class="rail-actions"><button id="duplicateSceneButton" class="secondary-button full" type="button">장면 복제</button><button id="deleteSceneButton" class="danger-button full" type="button">장면 삭제</button></div>
         </aside>
 
-        <section class="preview-panel">
-          <div class="panel-heading preview-heading">
-            <div><span class="step-label">PREVIEW</span><h2>원본 확인</h2></div>
-            <div class="preview-tools" id="previewTools">
-              <button class="icon-button" id="zoomOut" aria-label="축소">−</button>
-              <span id="zoomLabel">100%</span>
-              <button class="icon-button" id="zoomIn" aria-label="확대">+</button>
-              <button class="small-toggle is-active" id="boxToggle">Bounding box</button>
+        <section class="center-stage">
+          <div class="preview-head"><div><p class="eyebrow">PREVIEW</p><h3>실시간 미리보기</h3></div><span id="previewBadge">720p · 30fps</span></div>
+          <div class="canvas-shell" id="canvasShell">
+            <canvas id="previewCanvas" width="1280" height="720"></canvas>
+            <svg id="motionPathOverlay" class="motion-path-overlay" viewBox="0 0 100 100" preserveAspectRatio="none" aria-label="모션 경로 편집 오버레이"></svg>
+            <div class="canvas-message" id="canvasMessage" hidden>장면을 추가해 주세요.</div>
+          </div>
+          <div class="path-toolbar" aria-label="모션 경로 도구">
+            <div><strong>화면에서 이동 경로 그리기</strong><span id="pathHint">직선은 두 점, 곡선은 여러 점, 자유선은 드래그로 그립니다.</span></div>
+            <div class="path-actions">
+              <button type="button" class="path-mode active" data-path-mode="straight">직선</button>
+              <button type="button" class="path-mode" data-path-mode="curve">곡선</button>
+              <button type="button" class="path-mode" data-path-mode="free">자유선</button>
+              <button type="button" id="pathEditButton" class="secondary-button">경로 그리기</button>
+              <button type="button" id="pathClearButton" class="ghost-button">초기화</button>
             </div>
           </div>
-          <div class="preview-empty" id="previewEmpty">
-            <span class="empty-illustration">1</span>
-            <strong>왼쪽에서 파일을 넣어주세요.</strong>
-            <p>파일을 넣으면 이곳에 원본이 표시되고, 오른쪽에서 분석 목적과 비교할 AI를 선택하게 됩니다.</p>
+          <div class="transport">
+            <button class="play-button" id="playButton" type="button" aria-label="재생"><svg class="icon-play" viewBox="0 0 24 24" aria-hidden="true"><path d="M8 5.5 18 12 8 18.5z" /></svg><svg class="icon-pause" viewBox="0 0 24 24" aria-hidden="true" hidden><path d="M7 5h3.5v14H7zm6.5 0H17v14h-3.5z" /></svg></button>
+            <span id="timeCurrent">00:00.0</span><input id="seekInput" type="range" min="0" max="1" value="0" step="0.001" aria-label="재생 위치" /><span id="timeTotal">00:00.0</span>
           </div>
-          <div class="preview-canvas" id="previewCanvas" hidden>
-            <div class="preview-transform" id="previewTransform"></div>
+          <div class="timeline" id="timeline"></div>
+          <div class="export-panel">
+            <div class="export-copy"><strong id="exportStatus">렌더링 준비됨</strong><span>Canvas + MediaRecorder · 영상과 사운드를 하나의 WebM으로 기록</span><div class="progress"><i id="exportProgress"></i></div></div>
+            <button class="primary-button export-button" id="exportButton" type="button">WebM 내보내기</button>
           </div>
         </section>
 
-        <aside class="control-panel" id="controlPanel">
-          <div class="control-empty" id="controlEmpty">
-            <span class="empty-illustration">2</span>
-            <strong>파일을 넣으면 다음 단계가 열립니다.</strong>
-            <p>VisionDeck이 파일 종류를 보고 적합한 분석 방식과 모델 조합을 먼저 추천합니다.</p>
-          </div>
-
-          <div id="controlContent" hidden>
-            <div class="panel-heading control-heading">
-              <div><span class="step-label">STEP 2</span><h2>무엇을 알고 싶나요?</h2></div>
-              <span class="auto-label" id="autoLabel">Auto Router 추천</span>
+        <aside class="right-rail">
+          <section class="panel inspector-panel">
+            <div class="panel-title"><div><p class="eyebrow">MOTION</p><h3>장면 연출</h3></div></div>
+            <div id="inspectorContent">
+              <label class="field"><span>장면 이름</span><input id="sceneNameInput" type="text" maxlength="80" /></label>
+              <div class="field-grid">
+                <label class="field"><span>길이</span><input id="durationInput" type="number" min="0.8" max="15" step="0.1" /></label>
+                <label class="field"><span>전환</span><select id="transitionSelect"><option value="page-flow">Page flow</option><option value="crossfade">Crossfade</option><option value="zoom-out">Zoom out</option><option value="slide">Slide</option><option value="cut">Cut</option></select></label>
+              </div>
+              <label class="field"><span>모션 프리셋</span><select id="motionPresetSelect"></select></label>
+              <div class="range-block"><label><span>시작 줌 <output id="startZoomOutput"></output></span><input id="startZoomInput" type="range" min="100" max="220" step="1" /></label><label><span>끝 줌 <output id="endZoomOutput"></output></span><input id="endZoomInput" type="range" min="100" max="220" step="1" /></label></div>
+              <div class="path-summary" id="pathSummary"><span>경로</span><strong>기본 시작 → 끝</strong><small>미리보기 위에서 직접 경로를 그리면 숫자 좌표를 입력할 필요가 없습니다.</small></div>
+              <details class="advanced-motion">
+                <summary>세부 좌표 직접 조정</summary>
+                <div class="range-block two-col"><label><span>시작 X <output id="startXOutput"></output></span><input id="startXInput" type="range" min="0" max="100" step="1" /></label><label><span>시작 Y <output id="startYOutput"></output></span><input id="startYInput" type="range" min="0" max="100" step="1" /></label><label><span>끝 X <output id="endXOutput"></output></span><input id="endXInput" type="range" min="0" max="100" step="1" /></label><label><span>끝 Y <output id="endYOutput"></output></span><input id="endYInput" type="range" min="0" max="100" step="1" /></label></div>
+              </details>
+              <div class="toggle-line"><div><strong>커서 연출</strong><span>대상으로 이동 후 클릭</span></div><label class="switch"><input id="cursorEnabledInput" type="checkbox" /><i></i></label></div>
+              <div class="range-block two-col" id="cursorControls"><label><span>커서 X <output id="cursorXOutput"></output></span><input id="cursorXInput" type="range" min="0" max="100" step="1" /></label><label><span>커서 Y <output id="cursorYOutput"></output></span><input id="cursorYInput" type="range" min="0" max="100" step="1" /></label></div>
             </div>
+            <div class="inspector-empty" id="inspectorEmpty" hidden><strong>선택된 장면 없음</strong><p>장면을 선택하면 세부 연출을 수정할 수 있습니다.</p></div>
+          </section>
 
-            <div class="task-grid" id="taskGrid">
-              <button class="task-card is-selected" data-task="ocr"><span class="task-icon">Aa</span><strong>텍스트 읽기</strong><small>영수증·문서 OCR</small><span class="recommend-tag">추천</span></button>
-              <button class="task-card" data-task="table"><span class="task-icon">▦</span><strong>표 추출</strong><small>행·열 구조 인식</small></button>
-              <button class="task-card" data-task="document"><span class="task-icon">{ }</span><strong>정보 추출</strong><small>날짜·금액·항목 → JSON</small></button>
-              <button class="task-card" data-task="vision"><span class="task-icon">◉</span><strong>이미지 이해</strong><small>사진·Screenshot 설명</small></button>
-            </div>
-
-            <div class="model-section">
-              <div class="subheading"><div><span class="step-label">STEP 3</span><h3>비교할 AI</h3></div><small id="modelCount">3개 선택</small></div>
-              <div class="model-list" id="modelList"></div>
-            </div>
-
-            <div class="run-summary">
-              <div><strong id="runSummaryTitle">OCR 모델 3개를 같은 파일로 비교합니다.</strong><span id="runSummaryText">결과·처리시간·예상비용을 한 화면에서 보여줍니다.</span></div>
-              <button class="primary-button" id="runButton"><svg viewBox="0 0 24 24"><path d="m8 5 11 7-11 7Z"/></svg><span id="runButtonText">3개 모델로 비교 시작</span></button>
-            </div>
-          </div>
+          <section class="panel sound-panel">
+            <div class="panel-title"><div><p class="eyebrow">SOUND</p><h3>사운드 트랙</h3></div><button class="icon-text-button" id="soundPreviewButton" type="button">미리듣기</button></div>
+            <label class="field"><span>트랙</span><select id="soundPresetSelect"></select></label>
+            <div class="sound-preset-grid" id="soundPresetGrid" aria-label="기본 사운드 빠른 선택"></div>
+            <div class="sound-wave" id="soundWave" aria-hidden="true"></div>
+            <label class="range-single"><span>볼륨 <output id="volumeOutput"></output></span><input id="volumeInput" type="range" min="0" max="100" step="1" /></label>
+            <label class="check-line"><input id="fadeAudioInput" type="checkbox" /><span>시작/끝 0.8초 페이드</span></label>
+            <button class="secondary-button full" id="audioUploadButton" type="button">내 오디오 파일 사용</button>
+            <input id="audioInput" type="file" accept="audio/mpeg,audio/wav,audio/ogg,audio/webm,audio/mp4" hidden />
+            <p class="helper" id="audioHelper">기본 사운드는 브라우저에서 합성되어 별도 음원 라이선스가 필요 없습니다.</p>
+          </section>
         </aside>
-      </section>
-
-      <section class="results-section" id="resultsSection" hidden aria-live="polite">
-        <div class="results-heading">
-          <div><span class="step-label">STEP 4</span><h2>비교 결과</h2><p>세 모델의 결과를 비교했습니다. 가장 신뢰도가 높은 결과를 위에 추천합니다.</p></div>
-          <button class="outline-button" id="rerunButton">다시 비교</button>
-        </div>
-
-        <div class="winner-card">
-          <div class="winner-icon">✓</div>
-          <div class="winner-copy"><span>VISIONDECK 추천</span><h3><b id="winnerModel">GLM-OCR</b> 결과를 선택하는 것이 좋습니다.</h3><p id="winnerReason">한글·숫자·표 구조에서 기준 정답과 가장 많이 일치했습니다.</p></div>
-          <button class="primary-button compact" id="chooseWinnerButton">이 결과 선택</button>
-        </div>
-
-        <div class="score-cards" id="scoreCards"></div>
-
-        <div class="result-workbench">
-          <div class="result-tabs" id="resultTabs"></div>
-          <div class="result-view">
-            <div class="result-toolbar"><div><strong id="resultModelName">GLM-OCR</strong><span id="resultModelMeta">가장 높은 일치도</span></div><div><button class="ghost-button" id="copyButton">복사</button><button class="outline-button" id="exportJson">JSON</button><button class="outline-button" id="exportCsv">CSV</button></div></div>
-            <pre id="resultText"></pre>
-          </div>
-        </div>
-
-        <div class="consensus-card">
-          <div><span class="consensus-icon">≋</span><div><strong>Consensus Mode</strong><p>모델끼리 다른 부분만 다시 모아 보여줍니다. 사람이 확인해야 할 지점을 빠르게 찾을 수 있습니다.</p></div></div>
-          <div class="consensus-diff" id="consensusDiff"></div>
-        </div>
-      </section>
-    </main>
-
-    <footer class="footer">
-      <span>VisionDeck 2.0 · GitHub Pages ready</span>
-      <span>API Key는 코드에 저장하지 않습니다.</span>
-    </footer>
-  </div>
-
-  <dialog id="settingsDialog" class="dialog">
-    <form method="dialog" class="dialog-card" id="settingsForm">
-      <header><div><span class="step-label">LIVE MODE</span><h2>실제 AI 연결</h2><p>Demo가 아니라 OpenAI-compatible Gateway로 실제 요청을 보낼 때 사용합니다.</p></div><button class="icon-button" value="cancel" aria-label="닫기">×</button></header>
-      <div class="mode-selector">
-        <label><input type="radio" name="runMode" value="demo" checked /><span><strong>Demo</strong><small>API 없이 기능 체험</small></span></label>
-        <label><input type="radio" name="runMode" value="live" /><span><strong>Live Gateway</strong><small>실제 모델 호출</small></span></label>
       </div>
-      <label class="field"><span>Endpoint</span><input id="endpointInput" value="https://gateway.vlm.run/v1/openai" /></label>
-      <label class="field"><span>API Key <small>현재 탭 메모리에만 유지</small></span><input id="apiKeyInput" type="password" autocomplete="off" placeholder="필요한 경우 입력" /></label>
-      <div class="security-note"><strong>GitHub Pages에서는 Secret을 숨길 수 없습니다.</strong><p>공개 배포에서 비밀 API Key가 필요하면 Serverless Proxy를 사용해야 합니다.</p></div>
-      <footer><button class="ghost-button" value="cancel">취소</button><button class="primary-button" id="saveSettings" value="default">설정 적용</button></footer>
-    </form>
+    </section>
+
+    <section class="notes-section">
+      <div><p class="eyebrow">HOW IT WORKS</p><h2>정적 사이트이지만, 제작 흐름은 실제로 동작합니다.</h2></div>
+      <div class="notes-grid">
+        <article><span>01</span><h3>DOM + 링크 분석</h3><p>공개 URL을 서버 측 브라우저로 렌더링하고 제목·섹션·메뉴·CTA의 실제 좌표와 href를 읽어 페이지별 Blueprint를 만듭니다.</p></article>
+        <article><span>02</span><h3>Auto Director</h3><p>사용자가 정한 분석 범위 안에서 실제 위치 순서와 링크 목적지를 기준으로 Flow를 만들고, 체크만 바꾸면 장면 순서를 다시 계산합니다.</p></article>
+        <article><span>03</span><h3>모션 + 오디오 렌더링</h3><p>자동 연출안을 모션 템플릿과 직접 그린 경로로 다듬고, 내장 사운드 또는 업로드 음원을 영상과 함께 WebM으로 기록합니다.</p></article>
+      </div>
+    </section>
+  </main>
+
+  <footer class="footer"><div><strong>MotionFrame Studio</strong><span>v9.0 · Analysis Scope · Position Map · Flow Director · Audio/WebM</span></div><nav><a href="#capture">URL 분석</a><a href="#director">Auto Director</a><a href="#templates">모션 스타일</a><a href="#top">맨 위로</a></nav></footer>
+
+  <div class="toast-root" id="toastRoot" aria-live="polite" aria-atomic="true"></div>
+
+  <dialog id="templateSaveDialog" class="dialog">
+    <form method="dialog" id="templateSaveForm"><div class="dialog-head"><div><p class="eyebrow">SAVE TEMPLATE</p><h2>현재 연출을 템플릿으로 저장</h2></div><button class="dialog-close" value="cancel" aria-label="닫기">×</button></div><p>현재 장면들의 모션·전환·사운드 설정을 저장합니다. 이미지 자체는 저장하지 않아 다른 프로젝트에도 적용할 수 있습니다.</p><label class="field"><span>템플릿 이름</span><input id="templateNameInput" type="text" maxlength="60" required placeholder="예: 고객 데모 12초" /></label><label class="field"><span>분류</span><select id="templateCategoryInput"><option value="custom">내 템플릿</option><option value="website">Website</option><option value="product">Product</option><option value="fast">Fast</option><option value="calm">Calm</option></select></label><div class="dialog-actions"><button class="secondary-button" value="cancel">취소</button><button class="primary-button" id="confirmSaveTemplateButton" value="default">저장</button></div></form>
   </dialog>
 
-  <dialog id="guideDialog" class="dialog">
-    <form method="dialog" class="dialog-card guide-card">
-      <header><div><span class="step-label">HOW IT WORKS</span><h2>VisionDeck은 이렇게 씁니다.</h2></div><button class="icon-button" value="cancel" aria-label="닫기">×</button></header>
-      <ol class="guide-list"><li><b>1</b><div><strong>파일을 넣습니다.</strong><p>PDF, 영수증 사진, Screenshot 등을 넣습니다.</p></div></li><li><b>2</b><div><strong>원하는 작업을 고릅니다.</strong><p>텍스트 읽기, 표 추출, 구조화된 정보 추출, 이미지 이해 중 선택합니다.</p></div></li><li><b>3</b><div><strong>같은 파일을 여러 AI로 동시에 비교합니다.</strong><p>모델마다 결과, 속도, 비용, 기준 정답 일치도를 보여줍니다.</p></div></li><li><b>4</b><div><strong>가장 좋은 결과를 선택하고 내보냅니다.</strong><p>JSON/CSV로 저장하거나 Consensus 차이만 검토할 수 있습니다.</p></div></li></ol>
-      <footer><button class="primary-button" value="cancel">확인</button></footer>
-    </form>
-  </dialog>
+  <dialog id="resetDialog" class="dialog"><form method="dialog"><div class="dialog-head"><div><p class="eyebrow">RESET</p><h2>프로젝트를 초기화할까요?</h2></div><button class="dialog-close" value="cancel" aria-label="닫기">×</button></div><p>로컬에 저장된 현재 장면과 오디오 설정을 지우고 데모 프로젝트로 되돌립니다. 저장한 사용자 템플릿은 유지됩니다.</p><div class="dialog-actions"><button class="secondary-button" value="cancel">취소</button><button class="danger-button" id="confirmResetButton" value="default">초기화</button></div></form></dialog>
 
-  <div class="toast" id="toast" role="status" aria-live="polite" hidden></div>
-  <script type="module" src="./src/main.js"></script>
+  <script>
+    window.__motionframeReady = false;
+    window.setTimeout(function () {
+      if (window.__motionframeReady) return;
+      var status = document.getElementById('captureStatus');
+      if (!status) return;
+      status.classList.add('error');
+      status.querySelector('strong').textContent = '편집기 초기화 확인 필요';
+      status.querySelector('p').textContent = 'JavaScript가 시작되지 않았습니다. 새로고침 후에도 계속되면 배포된 assets/app.js를 확인해 주세요.';
+    }, 3500);
+  </script>
+  <script type="module" src="./assets/app.js?v=9.0.0"></script>
 </body>
 </html>

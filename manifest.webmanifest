@@ -1,0 +1,14 @@
+{
+  "name": "MotionFrame Studio",
+  "short_name": "MotionFrame",
+  "description": "URL의 화면과 페이지 구조를 분석해 모션 패스·사운드가 포함된 WebM 쇼케이스 영상을 만드는 브라우저 편집기",
+  "start_url": "./",
+  "scope": "./",
+  "display": "standalone",
+  "background_color": "#0b0f18",
+  "theme_color": "#0b0f18",
+  "icons": [
+    {"src":"./icon-192.png","sizes":"192x192","type":"image/png"},
+    {"src":"./icon-512.png","sizes":"512x512","type":"image/png"}
+  ]
+}
