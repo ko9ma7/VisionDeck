@@ -1,19 +1,13 @@
-import { cp, mkdir, readFile, rm, writeFile } from 'node:fs/promises';
+import fs from 'node:fs';
 import path from 'node:path';
-
-const root = process.cwd();
-const out = path.join(root, 'dist');
-const repository = process.env.GITHUB_REPOSITORY?.split('/')[1];
-const owner = process.env.GITHUB_REPOSITORY_OWNER;
-const siteUrl = process.env.VITE_SITE_URL || process.env.SITE_URL || (owner && repository ? `https://${owner}.github.io/${repository}/` : 'http://localhost:5173/');
-await rm(out, { recursive: true, force: true });
-await mkdir(out, { recursive: true });
-let html = await readFile(path.join(root, 'index.html'), 'utf8');
-html = html.replaceAll('__SITE_URL__', siteUrl);
-await writeFile(path.join(out, 'index.html'), html);
-await cp(path.join(root, 'src'), path.join(out, 'src'), { recursive: true });
-await cp(path.join(root, 'public'), out, { recursive: true });
-const sitemap = `<?xml version="1.0" encoding="UTF-8"?>\n<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"><url><loc>${siteUrl}</loc></url></urlset>\n`;
-await writeFile(path.join(out, 'sitemap.xml'), sitemap);
-console.log(`Built VisionDeck -> ${out}`);
-console.log(`Site URL: ${siteUrl}`);
+const root=path.resolve(new URL('..',import.meta.url).pathname);
+const out=path.join(root,'dist');
+fs.rmSync(out,{recursive:true,force:true});fs.mkdirSync(out,{recursive:true});
+const repo=process.env.GITHUB_REPOSITORY?.split('/')[1];
+const user=process.env.GITHUB_REPOSITORY_OWNER;
+const site=(process.env.SITE_URL || (repo&&user?`https://${user}.github.io/${repo}/`:'http://localhost:5173/')).replace(/([^/])$/,'$1/');
+for(const name of ['index.html','.nojekyll']){let s=fs.readFileSync(path.join(root,name),'utf8');s=s.replaceAll('__SITE_URL__',site);fs.writeFileSync(path.join(out,name),s)}
+function copyDir(src,dst){fs.mkdirSync(dst,{recursive:true});for(const ent of fs.readdirSync(src,{withFileTypes:true})){const a=path.join(src,ent.name),b=path.join(dst,ent.name);ent.isDirectory()?copyDir(a,b):fs.copyFileSync(a,b)}}
+copyDir(path.join(root,'src'),path.join(out,'src'));copyDir(path.join(root,'public'),out);
+for(const f of ['robots.txt','sitemap.xml']){const p=path.join(out,f);fs.writeFileSync(p,fs.readFileSync(p,'utf8').replaceAll('__SITE_URL__',site))}
+console.log(`Built VisionDeck → ${out}`);console.log(`SITE_URL=${site}`);

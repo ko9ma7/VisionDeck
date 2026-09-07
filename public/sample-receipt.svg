@@ -1,0 +1,25 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="720" height="1040" viewBox="0 0 720 1040">
+  <rect width="720" height="1040" fill="#f4f0e8"/>
+  <rect x="28" y="28" width="664" height="984" rx="6" fill="#fffef9" stroke="#d7d2c8"/>
+  <g font-family="Arial, 'Noto Sans KR', sans-serif" fill="#232323">
+    <text x="360" y="105" text-anchor="middle" font-size="38" font-weight="700">VISION CAFE</text>
+    <text x="360" y="145" text-anchor="middle" font-size="19">강남점 · 서울특별시 강남구</text>
+    <text x="78" y="215" font-size="19">사업자번호 120-88-02104</text>
+    <text x="78" y="248" font-size="19">2026-09-06 18:42</text>
+    <line x1="78" y1="285" x2="642" y2="285" stroke="#888" stroke-dasharray="8 8"/>
+    <text x="84" y="335" font-size="20" font-weight="700">품목</text><text x="500" y="335" font-size="20" font-weight="700">수량</text><text x="625" y="335" text-anchor="end" font-size="20" font-weight="700">금액</text>
+    <text x="84" y="390" font-size="22">아메리카노</text><text x="520" y="390" font-size="22">2</text><text x="625" y="390" text-anchor="end" font-size="22">9,000</text>
+    <text x="84" y="445" font-size="22">치즈케이크</text><text x="520" y="445" font-size="22">1</text><text x="625" y="445" text-anchor="end" font-size="22">6,500</text>
+    <line x1="78" y1="485" x2="642" y2="485" stroke="#888"/>
+    <text x="84" y="545" font-size="24" font-weight="700">합계</text><text x="625" y="545" text-anchor="end" font-size="30" font-weight="700">₩ 15,500</text>
+    <text x="84" y="595" font-size="19">부가세</text><text x="625" y="595" text-anchor="end" font-size="19">1,409</text>
+    <text x="84" y="680" font-size="18">결제수단</text><text x="625" y="680" text-anchor="end" font-size="18">신용카드</text>
+    <text x="84" y="720" font-size="18">승인번호</text><text x="625" y="720" text-anchor="end" font-size="18">30012345</text>
+    <g transform="translate(118 800)" fill="#222">
+      <rect width="4" height="95"/><rect x="9" width="2" height="95"/><rect x="16" width="6" height="95"/><rect x="28" width="3" height="95"/><rect x="36" width="7" height="95"/><rect x="48" width="2" height="95"/><rect x="56" width="5" height="95"/><rect x="66" width="2" height="95"/><rect x="74" width="8" height="95"/><rect x="87" width="3" height="95"/><rect x="95" width="5" height="95"/><rect x="105" width="2" height="95"/><rect x="113" width="8" height="95"/><rect x="126" width="4" height="95"/><rect x="136" width="2" height="95"/><rect x="143" width="7" height="95"/><rect x="156" width="3" height="95"/><rect x="165" width="6" height="95"/><rect x="177" width="2" height="95"/><rect x="185" width="8" height="95"/><rect x="198" width="3" height="95"/><rect x="207" width="5" height="95"/><rect x="218" width="2" height="95"/><rect x="226" width="7" height="95"/><rect x="238" width="3" height="95"/><rect x="247" width="8" height="95"/><rect x="260" width="2" height="95"/><rect x="268" width="5" height="95"/><rect x="280" width="3" height="95"/><rect x="289" width="7" height="95"/><rect x="302" width="2" height="95"/><rect x="310" width="8" height="95"/><rect x="323" width="3" height="95"/><rect x="332" width="5" height="95"/><rect x="343" width="2" height="95"/><rect x="351" width="8" height="95"/><rect x="364" width="4" height="95"/><rect x="374" width="2" height="95"/><rect x="381" width="7" height="95"/><rect x="394" width="3" height="95"/><rect x="403" width="6" height="95"/><rect x="415" width="2" height="95"/><rect x="423" width="8" height="95"/>
+    </g>
+    <text x="360" y="950" text-anchor="middle" font-size="16" fill="#777">감사합니다 · VisionDeck Sample</text>
+  </g>
+  <g fill="none" stroke="#2f72ff" stroke-width="3"><rect x="68" y="298" width="574" height="170" rx="6"/><rect x="68" y="503" width="574" height="70" rx="6"/></g>
+  <g fill="#2f72ff" font-family="Arial" font-size="14" font-weight="700"><rect x="68" y="278" width="78" height="24" rx="6"/><text x="77" y="295" fill="white">TABLE</text><rect x="68" y="483" width="76" height="24" rx="6"/><text x="77" y="500" fill="white">TOTAL</text></g>
+</svg>

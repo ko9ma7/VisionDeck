@@ -1,77 +1,208 @@
 <!doctype html>
-<html lang="ko" data-theme="dark">
+<html lang="ko" data-theme="light">
 <head>
   <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <meta name="theme-color" content="#0b1020" />
-  <meta name="description" content="PDF·사진·스크린샷·영상을 여러 Vision/OCR 모델에 동시에 비교하고 가장 적합한 결과를 찾는 Vision AI 워크벤치" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="description" content="문서 하나를 여러 Vision/OCR AI로 동시에 분석하고 결과·속도·비용을 비교해 가장 좋은 결과를 고르는 VisionDeck." />
+  <meta name="theme-color" content="#f7f9fc" />
   <meta name="color-scheme" content="light dark" />
+  <title>VisionDeck — 문서 하나, 여러 AI, 가장 좋은 결과</title>
   <link rel="canonical" href="__SITE_URL__" />
   <link rel="icon" href="./favicon.svg" type="image/svg+xml" />
-  <link rel="icon" href="./favicon-32x32.png" sizes="32x32" type="image/png" />
   <link rel="apple-touch-icon" href="./apple-touch-icon.png" />
   <link rel="manifest" href="./manifest.webmanifest" />
-  <link rel="stylesheet" href="./src/styles/global.css" />
+  <link rel="stylesheet" href="./src/styles.css" />
+
   <meta property="og:type" content="website" />
   <meta property="og:site_name" content="VisionDeck" />
-  <meta property="og:title" content="VisionDeck — Vision/OCR Model Comparator" />
-  <meta property="og:description" content="PDF·사진·Screenshot·영상을 끌어놓고 여러 최신 Vision/OCR AI 결과를 같은 화면에서 비교하세요." />
+  <meta property="og:title" content="VisionDeck — 문서 하나, 여러 AI, 가장 좋은 결과" />
+  <meta property="og:description" content="PDF·사진·스크린샷을 여러 OCR/Vision AI로 동시에 읽고 결과를 나란히 비교합니다." />
   <meta property="og:url" content="__SITE_URL__" />
   <meta property="og:image" content="__SITE_URL__og-image.png" />
   <meta name="twitter:card" content="summary_large_image" />
-  <meta name="twitter:title" content="VisionDeck — Vision/OCR Model Comparator" />
-  <meta name="twitter:description" content="한 파일을 여러 Vision/OCR 모델로 동시에 읽고 결과·속도·비용을 비교하는 워크벤치" />
+  <meta name="twitter:title" content="VisionDeck — AI 문서 비교 워크벤치" />
+  <meta name="twitter:description" content="파일을 넣고, 분석 목적을 고르고, 여러 AI 결과 중 가장 좋은 것을 선택하세요." />
   <meta name="twitter:image" content="__SITE_URL__og-image.png" />
-  <title>VisionDeck — Vision/OCR Model Comparator</title>
-  <script type="application/ld+json">{"@context":"https://schema.org","@type":"SoftwareApplication","name":"VisionDeck","applicationCategory":"DeveloperApplication","operatingSystem":"Web","description":"Vision/OCR model comparison workbench for PDFs, images, screenshots, and videos."}</script>
+  <script type="application/ld+json">{"@context":"https://schema.org","@type":"SoftwareApplication","name":"VisionDeck","applicationCategory":"BusinessApplication","operatingSystem":"Web","description":"Compare OCR and vision AI results for documents and images."}</script>
 </head>
 <body>
-  <svg class="svg-sprite" aria-hidden="true">
-    <symbol id="i-chevron" viewBox="0 0 24 24"><path d="m7 10 5 5 5-5"/></symbol>
-    <symbol id="i-sun" viewBox="0 0 24 24"><circle cx="12" cy="12" r="4"/><path d="M12 2v2M12 20v2M4.93 4.93l1.42 1.42M17.66 17.66l1.41 1.41M2 12h2M20 12h2M4.93 19.07l1.42-1.42M17.66 6.34l1.41-1.41"/></symbol>
-    <symbol id="i-moon" viewBox="0 0 24 24"><path d="M20.5 14.4A8.5 8.5 0 0 1 9.6 3.5 8.5 8.5 0 1 0 20.5 14.4Z"/></symbol>
-    <symbol id="i-settings" viewBox="0 0 24 24"><circle cx="12" cy="12" r="3"/><path d="M19.4 15a1.7 1.7 0 0 0 .34 1.88l.06.06-2.83 2.83-.06-.06A1.7 1.7 0 0 0 15 19.4a1.7 1.7 0 0 0-1 .6 1.7 1.7 0 0 0-.4 1.1V21h-4v-.09a1.7 1.7 0 0 0-1.07-1.56 1.7 1.7 0 0 0-1.88.34l-.06.06-2.83-2.83.06-.06A1.7 1.7 0 0 0 4.6 15a1.7 1.7 0 0 0-.6-1 1.7 1.7 0 0 0-1.1-.4H3v-4h.09a1.7 1.7 0 0 0 1.56-1.07 1.7 1.7 0 0 0-.34-1.88l-.06-.06 2.83-2.83.06.06A1.7 1.7 0 0 0 9 4.6a1.7 1.7 0 0 0 1-.6 1.7 1.7 0 0 0 .4-1.1V3h4v.09a1.7 1.7 0 0 0 1.07 1.56 1.7 1.7 0 0 0 1.88-.34l.06-.06 2.83 2.83-.06.06A1.7 1.7 0 0 0 19.4 9c.14.36.35.68.6 1 .27.3.66.45 1.06.4H21v4h-.09a1.7 1.7 0 0 0-1.51.6Z"/></symbol>
-    <symbol id="i-upload" viewBox="0 0 24 24"><path d="M12 16V4m0 0-4 4m4-4 4 4"/><path d="M20 15v4a2 2 0 0 1-2 2H6a2 2 0 0 1-2-2v-4"/></symbol>
-    <symbol id="i-reset" viewBox="0 0 24 24"><path d="M3 12a9 9 0 1 0 3-6.7L3 8"/><path d="M3 3v5h5"/></symbol>
-    <symbol id="i-spark" viewBox="0 0 24 24"><path d="m12 3 1.4 4.6L18 9l-4.6 1.4L12 15l-1.4-4.6L6 9l4.6-1.4L12 3Z"/><path d="m19 15 .7 2.3L22 18l-2.3.7L19 21l-.7-2.3L16 18l2.3-.7L19 15Z"/></symbol>
-    <symbol id="i-play" viewBox="0 0 24 24"><path d="m8 5 11 7-11 7V5Z"/></symbol>
-    <symbol id="i-compare" viewBox="0 0 24 24"><path d="M8 7h11m0 0-3-3m3 3-3 3M16 17H5m0 0 3-3m-3 3 3 3"/></symbol>
-    <symbol id="i-scan" viewBox="0 0 24 24"><path d="M4 7V4h3M17 4h3v3M20 17v3h-3M7 20H4v-3M7 12h10"/></symbol>
-    <symbol id="i-cross" viewBox="0 0 24 24"><circle cx="12" cy="12" r="5"/><path d="M12 2v5M12 17v5M2 12h5M17 12h5"/></symbol>
-    <symbol id="i-minus" viewBox="0 0 24 24"><circle cx="11" cy="11" r="7"/><path d="M8 11h6M16 16l5 5"/></symbol>
-    <symbol id="i-plus" viewBox="0 0 24 24"><circle cx="11" cy="11" r="7"/><path d="M8 11h6M11 8v6M16 16l5 5"/></symbol>
-    <symbol id="i-copy" viewBox="0 0 24 24"><rect x="9" y="9" width="11" height="11" rx="2"/><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/></symbol>
-    <symbol id="i-close" viewBox="0 0 24 24"><path d="m6 6 12 12M18 6 6 18"/></symbol>
-    <symbol id="i-bolt" viewBox="0 0 24 24"><path d="m13 2-9 12h8l-1 8 9-12h-8l1-8Z"/></symbol>
-  </svg>
   <div class="app-shell">
     <header class="topbar">
-      <div class="brand" aria-label="VisionDeck"><svg class="brand-mark" viewBox="0 0 40 40" aria-hidden="true"><rect x="3" y="4" width="34" height="32" rx="8" fill="currentColor" opacity=".12"/><path d="M10 12.5h20M10 20h20M10 27.5h12" stroke="currentColor" stroke-width="2.4" stroke-linecap="round"/><circle cx="28" cy="27.5" r="4.5" fill="currentColor"/><path d="m31.4 30.8 4 4" stroke="currentColor" stroke-width="2.4" stroke-linecap="round"/></svg><span class="brand-copy"><strong>VisionDeck</strong><span>Visual AI Workbench</span></span></div>
-      <div class="topbar-center"><button class="workspace-name">Receipt benchmark <svg><use href="#i-chevron"/></svg></button></div>
-      <nav class="topbar-actions" aria-label="전역 메뉴"><span id="modeBadge" class="mode-badge">DEMO</span><button id="themeButton" class="icon-button" aria-label="테마 전환" title="테마 전환"><svg><use href="#i-sun"/></svg></button><a class="icon-button" href="https://github.com/" target="_blank" rel="noreferrer" aria-label="GitHub" title="GitHub"><span class="github-mark">GH</span></a><button id="settingsButton" class="icon-button" aria-label="Gateway 설정" title="Gateway 설정"><svg><use href="#i-settings"/></svg></button></nav>
+      <a class="brand" href="#" aria-label="VisionDeck 홈">
+        <span class="brand-mark" aria-hidden="true">
+          <svg viewBox="0 0 44 44"><rect x="4" y="5" width="36" height="34" rx="10"/><path d="M13 15h18M13 22h18M13 29h10"/><circle cx="30" cy="29" r="4.5"/><path d="m33.2 32.2 4 4"/></svg>
+        </span>
+        <span><strong>VisionDeck</strong><small>문서 하나 · 여러 AI · 가장 좋은 결과</small></span>
+      </a>
+      <nav class="header-actions" aria-label="전역 메뉴">
+        <button class="ghost-button" id="guideButton">사용 방법</button>
+        <button class="icon-button" id="themeButton" aria-label="테마 전환" title="테마 전환">
+          <svg viewBox="0 0 24 24"><path d="M12 3v2m0 14v2M3 12h2m14 0h2M5.6 5.6 7 7m10 10 1.4 1.4M18.4 5.6 17 7M7 17l-1.4 1.4"/><circle cx="12" cy="12" r="4"/></svg>
+        </button>
+        <button class="outline-button" id="settingsButton"><span class="status-dot"></span> 실제 AI 연결</button>
+      </nav>
     </header>
 
-    <main class="workspace">
-      <aside class="left-rail">
-        <section class="rail-section"><div class="section-heading"><span>INPUT</span><button id="resetButton" class="icon-button tiny" title="초기화"><svg><use href="#i-reset"/></svg></button></div><div id="dropContainer"></div></section>
-        <section class="rail-section"><div class="section-heading"><span>AUTO ROUTER</span></div><label class="toggle-row"><span><strong>자동 모델 선택</strong><small id="routeLabel">Unknown input</small></span><input id="autoRouterToggle" type="checkbox" checked><span class="switch"></span></label><div class="router-card"><span class="router-icon"><svg><use href="#i-spark"/></svg></span><div><strong id="routeKind">OCR</strong><p id="routeReason">파일 형식을 확정하지 못해 범용 OCR 비교 구성을 적용했습니다.</p></div></div></section>
-        <section class="rail-section grow"><div class="section-heading"><span>MODELS</span><span id="selectedCount">3 selected</span></div><div id="modelList" class="model-list"></div></section>
-        <section class="rail-section rail-footer"><label class="toggle-row compact"><span><strong>Consensus mode</strong><small>다른 부분을 다시 비교</small></span><input id="consensusToggle" type="checkbox" checked><span class="switch"></span></label></section>
-      </aside>
-
-      <section class="center-stage">
-        <div class="stage-topline"><div id="tabs" class="tabs" role="tablist" aria-label="분석 모드"></div><div class="run-actions"><div class="model-selector-wrap"><button id="modelSelectorButton" class="button secondary compact-button"><svg><use href="#i-compare"/></svg><span id="modelSelectorLabel">3 models</span><svg><use href="#i-chevron"/></svg></button><div id="modelMenu" class="model-menu" hidden></div></div><button id="runButton" class="button primary"><svg><use href="#i-play"/></svg><span>Run comparison</span></button></div></div>
-        <div class="canvas-area"><section class="preview-shell" aria-label="원본 미리보기"><div class="panel-toolbar"><div><strong>Source</strong><span id="sourceLabel">샘플 영수증</span></div><div class="toolbar-actions"><button id="boxButton" class="icon-button is-active" title="Bounding Box 표시"><svg><use href="#i-scan"/></svg></button><button id="selectionButton" class="icon-button" title="선택 영역 모드"><svg><use href="#i-cross"/></svg></button><span class="toolbar-divider"></span><button id="zoomOutButton" class="icon-button" title="축소"><svg><use href="#i-minus"/></svg></button><span id="zoomValue" class="zoom-value">100%</span><button id="zoomInButton" class="icon-button" title="확대"><svg><use href="#i-plus"/></svg></button></div></div><div id="previewStage" class="preview-stage"><div id="previewTransform" class="preview-transform"></div></div></section></div>
+    <main>
+      <section class="intro-strip" aria-labelledby="introTitle">
+        <div>
+          <h1 id="introTitle">파일을 한 번 넣고, 여러 AI 결과를 비교해서 <em>가장 좋은 결과</em>를 고릅니다.</h1>
+          <p>OCR, 표 추출, 문서 정보 추출, 이미지 설명을 모델별로 나란히 비교합니다. 처음이라면 아래 4단계만 따라가면 됩니다.</p>
+        </div>
+        <div class="mode-chip" id="modeChip"><span></span> Demo mode</div>
       </section>
 
-      <aside class="right-panel"><div class="right-panel-header"><div><span class="eyeline">MODEL OUTPUT</span><h2 id="resultTitle">OCR results</h2></div><span class="analysis-state"><svg><use href="#i-bolt"/></svg><span id="analysisState">Ready</span></span></div><div id="rightPanelScroll" class="right-panel-scroll"></div><div class="privacy-note">업로드 파일은 브라우저에서 미리보기됩니다. Live 모드에서만 설정한 Gateway로 전송됩니다.</div></aside>
+      <ol class="stepper" aria-label="VisionDeck 사용 순서">
+        <li class="is-active" data-step="1"><b>1</b><span><strong>파일 넣기</strong><small>PDF · 사진 · Screenshot</small></span></li>
+        <li data-step="2"><b>2</b><span><strong>무엇을 할지 선택</strong><small>OCR · 표 · 문서 · Vision</small></span></li>
+        <li data-step="3"><b>3</b><span><strong>AI 비교 실행</strong><small>최대 4개 모델</small></span></li>
+        <li data-step="4"><b>4</b><span><strong>결과 선택·내보내기</strong><small>JSON · CSV</small></span></li>
+      </ol>
+
+      <section class="workspace" id="workspace">
+        <aside class="file-panel">
+          <div class="panel-heading">
+            <div><span class="step-label">STEP 1</span><h2>분석할 파일</h2></div>
+            <button class="text-button" id="resetButton" hidden>처음부터</button>
+          </div>
+
+          <label class="dropzone" id="dropzone" for="fileInput">
+            <input id="fileInput" type="file" accept="image/*,.pdf,video/*" hidden />
+            <span class="drop-icon"><svg viewBox="0 0 24 24"><path d="M12 16V4m0 0L8 8m4-4 4 4M5 14v5h14v-5"/></svg></span>
+            <strong>파일을 여기에 끌어놓으세요</strong>
+            <span>또는 클릭해서 선택 · PDF / Image / Screenshot / Video</span>
+            <span class="drop-cta">파일 선택</span>
+          </label>
+
+          <button class="sample-button" id="sampleButton">
+            <img src="./sample-receipt.svg" alt="샘플 영수증 미리보기" />
+            <span><strong>처음이라면 예제로 시작</strong><small>한국어 영수증 샘플로 30초 만에 전체 흐름 확인</small></span>
+            <svg viewBox="0 0 24 24"><path d="m9 18 6-6-6-6"/></svg>
+          </button>
+
+          <div class="file-meta" id="fileMeta" hidden>
+            <div class="file-type-icon" id="fileTypeIcon">IMG</div>
+            <div><strong id="fileName">sample-receipt.png</strong><small id="fileInfo">Sample · receipt</small></div>
+            <span class="success-mark">✓</span>
+          </div>
+
+          <div class="privacy-box">
+            <strong>파일은 언제 외부로 전송되나요?</strong>
+            <p>Demo에서는 브라우저 안에서만 미리봅니다. “실제 AI 연결”을 켰을 때만 설정한 Gateway로 요청합니다.</p>
+          </div>
+        </aside>
+
+        <section class="preview-panel">
+          <div class="panel-heading preview-heading">
+            <div><span class="step-label">PREVIEW</span><h2>원본 확인</h2></div>
+            <div class="preview-tools" id="previewTools">
+              <button class="icon-button" id="zoomOut" aria-label="축소">−</button>
+              <span id="zoomLabel">100%</span>
+              <button class="icon-button" id="zoomIn" aria-label="확대">+</button>
+              <button class="small-toggle is-active" id="boxToggle">Bounding box</button>
+            </div>
+          </div>
+          <div class="preview-empty" id="previewEmpty">
+            <span class="empty-illustration">1</span>
+            <strong>왼쪽에서 파일을 넣어주세요.</strong>
+            <p>파일을 넣으면 이곳에 원본이 표시되고, 오른쪽에서 분석 목적과 비교할 AI를 선택하게 됩니다.</p>
+          </div>
+          <div class="preview-canvas" id="previewCanvas" hidden>
+            <div class="preview-transform" id="previewTransform"></div>
+          </div>
+        </section>
+
+        <aside class="control-panel" id="controlPanel">
+          <div class="control-empty" id="controlEmpty">
+            <span class="empty-illustration">2</span>
+            <strong>파일을 넣으면 다음 단계가 열립니다.</strong>
+            <p>VisionDeck이 파일 종류를 보고 적합한 분석 방식과 모델 조합을 먼저 추천합니다.</p>
+          </div>
+
+          <div id="controlContent" hidden>
+            <div class="panel-heading control-heading">
+              <div><span class="step-label">STEP 2</span><h2>무엇을 알고 싶나요?</h2></div>
+              <span class="auto-label" id="autoLabel">Auto Router 추천</span>
+            </div>
+
+            <div class="task-grid" id="taskGrid">
+              <button class="task-card is-selected" data-task="ocr"><span class="task-icon">Aa</span><strong>텍스트 읽기</strong><small>영수증·문서 OCR</small><span class="recommend-tag">추천</span></button>
+              <button class="task-card" data-task="table"><span class="task-icon">▦</span><strong>표 추출</strong><small>행·열 구조 인식</small></button>
+              <button class="task-card" data-task="document"><span class="task-icon">{ }</span><strong>정보 추출</strong><small>날짜·금액·항목 → JSON</small></button>
+              <button class="task-card" data-task="vision"><span class="task-icon">◉</span><strong>이미지 이해</strong><small>사진·Screenshot 설명</small></button>
+            </div>
+
+            <div class="model-section">
+              <div class="subheading"><div><span class="step-label">STEP 3</span><h3>비교할 AI</h3></div><small id="modelCount">3개 선택</small></div>
+              <div class="model-list" id="modelList"></div>
+            </div>
+
+            <div class="run-summary">
+              <div><strong id="runSummaryTitle">OCR 모델 3개를 같은 파일로 비교합니다.</strong><span id="runSummaryText">결과·처리시간·예상비용을 한 화면에서 보여줍니다.</span></div>
+              <button class="primary-button" id="runButton"><svg viewBox="0 0 24 24"><path d="m8 5 11 7-11 7Z"/></svg><span id="runButtonText">3개 모델로 비교 시작</span></button>
+            </div>
+          </div>
+        </aside>
+      </section>
+
+      <section class="results-section" id="resultsSection" hidden aria-live="polite">
+        <div class="results-heading">
+          <div><span class="step-label">STEP 4</span><h2>비교 결과</h2><p>세 모델의 결과를 비교했습니다. 가장 신뢰도가 높은 결과를 위에 추천합니다.</p></div>
+          <button class="outline-button" id="rerunButton">다시 비교</button>
+        </div>
+
+        <div class="winner-card">
+          <div class="winner-icon">✓</div>
+          <div class="winner-copy"><span>VISIONDECK 추천</span><h3><b id="winnerModel">GLM-OCR</b> 결과를 선택하는 것이 좋습니다.</h3><p id="winnerReason">한글·숫자·표 구조에서 기준 정답과 가장 많이 일치했습니다.</p></div>
+          <button class="primary-button compact" id="chooseWinnerButton">이 결과 선택</button>
+        </div>
+
+        <div class="score-cards" id="scoreCards"></div>
+
+        <div class="result-workbench">
+          <div class="result-tabs" id="resultTabs"></div>
+          <div class="result-view">
+            <div class="result-toolbar"><div><strong id="resultModelName">GLM-OCR</strong><span id="resultModelMeta">가장 높은 일치도</span></div><div><button class="ghost-button" id="copyButton">복사</button><button class="outline-button" id="exportJson">JSON</button><button class="outline-button" id="exportCsv">CSV</button></div></div>
+            <pre id="resultText"></pre>
+          </div>
+        </div>
+
+        <div class="consensus-card">
+          <div><span class="consensus-icon">≋</span><div><strong>Consensus Mode</strong><p>모델끼리 다른 부분만 다시 모아 보여줍니다. 사람이 확인해야 할 지점을 빠르게 찾을 수 있습니다.</p></div></div>
+          <div class="consensus-diff" id="consensusDiff"></div>
+        </div>
+      </section>
     </main>
 
-    <footer class="statusbar"><span><i class="status-light"></i>Gateway: <span id="gatewayStatus">Demo sandbox</span></span><span id="featureStatus">Auto Router ON · Consensus ON</span><span>VisionDeck 1.0</span></footer>
+    <footer class="footer">
+      <span>VisionDeck 2.0 · GitHub Pages ready</span>
+      <span>API Key는 코드에 저장하지 않습니다.</span>
+    </footer>
   </div>
 
-  <div id="settingsBackdrop" class="modal-backdrop" hidden><section class="modal" role="dialog" aria-modal="true" aria-labelledby="settingsTitle"><header><div><h2 id="settingsTitle">Gateway settings</h2><p>키는 메모리에서만 사용하며 LocalStorage에 저장하지 않습니다.</p></div><button id="settingsClose" class="icon-button" aria-label="설정 닫기"><svg><use href="#i-close"/></svg></button></header><div class="mode-switch" role="group" aria-label="실행 모드"><button id="demoModeButton" class="is-active">Demo mode</button><button id="liveModeButton">Live Gateway</button></div><label class="field"><span>OpenAI-compatible endpoint</span><input id="endpointInput" value="https://gateway.vlm.run/v1/openai" spellcheck="false"></label><label class="field"><span>API key <small>(anonymous alpha에서는 비워둘 수 있음)</small></span><input id="apiKeyInput" type="password" placeholder="세션에만 유지" autocomplete="off"></label><label class="field"><span>Remote document/image URL <small>(PDF·video Live mode용)</small></span><input id="remoteUrlInput" placeholder="https://.../document.pdf" spellcheck="false"></label><div class="security-callout"><strong>GitHub Pages 보안 원칙</strong><p>정적 프론트엔드에 비밀 API 키를 하드코딩하지 않습니다. 민감한 인증이 필요한 배포는 Serverless Proxy를 사용하세요.</p></div><a class="text-link" href="https://docs.vlm.run/gateway" target="_blank" rel="noreferrer">VLM Run Gateway 문서 ↗</a><footer><button id="settingsDone" class="button secondary">닫기</button></footer></section></div>
-  <div id="toastStack" class="toast-stack" aria-live="polite"></div>
+  <dialog id="settingsDialog" class="dialog">
+    <form method="dialog" class="dialog-card" id="settingsForm">
+      <header><div><span class="step-label">LIVE MODE</span><h2>실제 AI 연결</h2><p>Demo가 아니라 OpenAI-compatible Gateway로 실제 요청을 보낼 때 사용합니다.</p></div><button class="icon-button" value="cancel" aria-label="닫기">×</button></header>
+      <div class="mode-selector">
+        <label><input type="radio" name="runMode" value="demo" checked /><span><strong>Demo</strong><small>API 없이 기능 체험</small></span></label>
+        <label><input type="radio" name="runMode" value="live" /><span><strong>Live Gateway</strong><small>실제 모델 호출</small></span></label>
+      </div>
+      <label class="field"><span>Endpoint</span><input id="endpointInput" value="https://gateway.vlm.run/v1/openai" /></label>
+      <label class="field"><span>API Key <small>현재 탭 메모리에만 유지</small></span><input id="apiKeyInput" type="password" autocomplete="off" placeholder="필요한 경우 입력" /></label>
+      <div class="security-note"><strong>GitHub Pages에서는 Secret을 숨길 수 없습니다.</strong><p>공개 배포에서 비밀 API Key가 필요하면 Serverless Proxy를 사용해야 합니다.</p></div>
+      <footer><button class="ghost-button" value="cancel">취소</button><button class="primary-button" id="saveSettings" value="default">설정 적용</button></footer>
+    </form>
+  </dialog>
+
+  <dialog id="guideDialog" class="dialog">
+    <form method="dialog" class="dialog-card guide-card">
+      <header><div><span class="step-label">HOW IT WORKS</span><h2>VisionDeck은 이렇게 씁니다.</h2></div><button class="icon-button" value="cancel" aria-label="닫기">×</button></header>
+      <ol class="guide-list"><li><b>1</b><div><strong>파일을 넣습니다.</strong><p>PDF, 영수증 사진, Screenshot 등을 넣습니다.</p></div></li><li><b>2</b><div><strong>원하는 작업을 고릅니다.</strong><p>텍스트 읽기, 표 추출, 구조화된 정보 추출, 이미지 이해 중 선택합니다.</p></div></li><li><b>3</b><div><strong>같은 파일을 여러 AI로 동시에 비교합니다.</strong><p>모델마다 결과, 속도, 비용, 기준 정답 일치도를 보여줍니다.</p></div></li><li><b>4</b><div><strong>가장 좋은 결과를 선택하고 내보냅니다.</strong><p>JSON/CSV로 저장하거나 Consensus 차이만 검토할 수 있습니다.</p></div></li></ol>
+      <footer><button class="primary-button" value="cancel">확인</button></footer>
+    </form>
+  </dialog>
+
+  <div class="toast" id="toast" role="status" aria-live="polite" hidden></div>
   <script type="module" src="./src/main.js"></script>
 </body>
 </html>

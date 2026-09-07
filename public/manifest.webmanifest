@@ -1,14 +1,13 @@
 {
-  "name": "VisionDeck — Visual AI Workbench",
+  "name": "VisionDeck",
   "short_name": "VisionDeck",
-  "description": "Compare Vision/OCR models for PDFs, images, screenshots, and videos.",
+  "description": "여러 Vision/OCR AI 결과를 비교하고 가장 좋은 결과를 고르는 문서 분석 워크벤치",
   "start_url": "./",
-  "scope": "./",
   "display": "standalone",
-  "background_color": "#0b0f17",
-  "theme_color": "#0b1020",
+  "background_color": "#f7f9fc",
+  "theme_color": "#246bfd",
   "icons": [
-    { "src": "icon-192.png", "sizes": "192x192", "type": "image/png" },
-    { "src": "icon-512.png", "sizes": "512x512", "type": "image/png" }
+    {"src":"./icon-192.png","sizes":"192x192","type":"image/png"},
+    {"src":"./icon-512.png","sizes":"512x512","type":"image/png"}
   ]
 }

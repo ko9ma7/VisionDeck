@@ -1,8 +1,6 @@
-import { access, readFile } from 'node:fs/promises';
-const required = ['index.html','src/main.js','src/styles/global.css','public/favicon.svg','public/manifest.webmanifest','public/404.html','.github/workflows/deploy.yml','README.md'];
-for (const file of required) await access(file);
-const html = await readFile('index.html','utf8');
-for (const token of ['<title>','og:title','twitter:card','manifest.webmanifest','src/main.js']) if (!html.includes(token)) throw new Error(`index.html missing ${token}`);
-const js = await readFile('src/main.js','utf8');
-for (const token of ['runComparison','autoRoute','consensusScores','runGatewayModel']) if (!js.includes(token)) throw new Error(`src/main.js missing ${token}`);
-console.log('VisionDeck static checks passed.');
+import fs from 'node:fs';
+const req=['index.html','src/main.js','src/styles.css','public/favicon.svg','public/sample-receipt.svg','public/manifest.webmanifest','.github/workflows/deploy.yml'];
+for(const p of req){if(!fs.existsSync(new URL(`../${p}`,import.meta.url)))throw new Error(`Missing ${p}`)}
+const html=fs.readFileSync(new URL('../index.html',import.meta.url),'utf8');
+for(const s of ['<title>','og:title','manifest.webmanifest','src/main.js'])if(!html.includes(s))throw new Error(`index.html missing ${s}`);
+console.log('VisionDeck check: OK');

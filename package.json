@@ -1,14 +1,11 @@
 {
   "name": "visiondeck",
-  "version": "1.0.0",
+  "version": "2.0.0",
   "private": true,
   "type": "module",
   "scripts": {
-    "dev": "node scripts/serve.mjs",
+    "dev": "node scripts/dev.mjs",
     "build": "node scripts/build.mjs",
     "check": "node scripts/check.mjs"
-  },
-  "engines": {
-    "node": ">=20"
   }
 }
