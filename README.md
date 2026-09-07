@@ -1,171 +1,129 @@
-# MotionFrame Studio v9
+# VisionDeck 3.0 — Local-first Visual AI Workbench
 
-여러 웹 URL을 **입력 순서대로 제품 데모의 챕터**로 해석하고, 각 화면에서 실제로 보이는 제목·제품/UI 표면·버튼만 골라 강한 카메라 모션과 클릭을 연결한 뒤 WebM으로 렌더링하는 GitHub Pages 정적 웹앱입니다.
+VisionDeck은 **API 키가 없어도 실제 파일을 처리하는** 브라우저 기반 OCR/Vision 워크벤치입니다. 기본 기능은 Tesseract.js + PDF.js로 로컬에서 실행하고, 사용자가 원할 때만 Transformers.js 로컬 AI 또는 OpenAI-compatible Cloud AI를 추가합니다.
 
-## v9에서 바뀐 기준
+## 핵심 원칙
 
-v8까지의 문제는 페이지 전체 DOM을 너무 많이 선택해 `Scene → 좌표`가 먼저 나왔다는 점입니다. v9는 다음 순서로 동작합니다.
+- Demo 고정 결과 없음
+- 이미지/스크린샷: 브라우저에서 실제 Tesseract OCR
+- PDF: PDF.js로 실제 페이지 렌더링 후 OCR
+- Video: 브라우저에서 대표 프레임 추출 후 OCR/Vision
+- Compare: 원본/대비/이진화 Tesseract 파이프라인의 실제 결과 비교
+- Confidence: Tesseract 내부 confidence로 명확히 표시 (정답 정확도와 다름)
+- Consensus: 결과 간 토큰 overlap/diff이며 정확도라고 부르지 않음
+- Local Vision/TrOCR: Transformers.js 모델을 선택적으로 다운로드
+- Cloud AI: API 설정 후에만 파일 전송
+- API Key는 소스/LocalStorage에 저장하지 않음
 
-```text
-URL 목록
-  ↓
-각 URL을 하나의 Chapter로 해석
-  ↓
-같은 문서의 #hash URL은 중복 페이지가 아니라 별도 Viewpoint로 처리
-  ↓
-현재 viewport에서 실제로 보이는 DOM만 선택
-  ↓
-Chapter당 핵심 2~4개 자동 선택
-  - H1 / section title
-  - product UI / canvas / preview / input surface
-  - primary action
-  - 다음 URL을 가리키는 menu / CTA
-  ↓
-AI Storyboard
-  ↓
-Punch / Chapter Slam / Spotlight / Cursor Impact / Page Impact
-  ↓
-Scene + camera keyframes
-  ↓
-Sound + WebM
-```
-
-## 예: MotionFrame 자체를 입력할 때
-
-```text
-https://ko9ma7.github.io/motionframe/
-https://ko9ma7.github.io/motionframe/#capture
-https://ko9ma7.github.io/motionframe/#templates
-https://ko9ma7.github.io/motionframe/#studio
-```
-
-기본 Storyboard는 대략 다음처럼 압축됩니다.
-
-```text
-01 Intro 전체 Reveal
-02 Hero H1 Punch
-03 Hero 제품 프리뷰 Spotlight
-04 "URL로 시작하기" Cursor Click → #capture
-05 #capture 제목 Chapter Slam
-06 URL 입력 영역 Spotlight
-07 Auto Director 버튼 Cursor Impact
-08 "모션 스타일" Click → #templates
-09 #templates 제목 Chapter Slam
-10 Impact Product Flow 집중
-11 "편집기" Click → #studio
-12 #studio 제목 Chapter Slam
-13 실시간 미리보기 Orbit
-14 Resolve
-```
-
-기존처럼 같은 페이지의 H1과 버튼을 모든 hash URL에서 반복하지 않습니다.
-
-## 핵심 기능
-
-### AI Story capture
-
-기본 캡처 방식은 `AI 쇼릴 · URL별 뷰포인트`입니다. hash URL을 열면 해당 위치로 스크롤된 viewport를 캡처하고 DOM 분석 결과에 `scrollY`도 저장합니다.
-
-따라서 `#capture`의 화면을 분석할 때 문서 맨 위 H1을 다시 선택하지 않고 실제 #capture 화면 안에 보이는 요소를 기준으로 판단합니다.
-
-### Chapter-first Director
-
-Auto Director 상단에는 원본 DOM 수백 개를 바로 펼치지 않습니다. 먼저 챕터별 AI 추천 항목만 보여줍니다.
-
-원본 후보는 `고급 · 분석 후보 보기`를 열었을 때만 표시됩니다.
-
-### Strong motion grammar
-
-기본 Impact Product Flow는 다음 모션을 사용합니다.
-
-- Reveal
-- Punch Zoom
-- Chapter Slam
-- Spotlight Push
-- Sweep / Arc Orbit
-- Cursor Impact
-- Page Impact
-- Resolve
-
-Page Impact는 이전 화면이 빠르게 뒤로 빠지고 다음 챕터가 크게 들어온 뒤 정착하도록 구성되어 있습니다.
-
-### Sound
-
-- Ambient Flow
-- Soft Corporate
-- Lo-fi Product
-- Minimal Keys
-- Glass Motion
-- Focus Drive
-- Launch Drive
-- 사용자 MP3/WAV/OGG
-- click accent
-- punch / chapter / spotlight whoosh
-- page transition whoosh
-
-오디오는 Web Audio track으로 만들어 Canvas video track과 함께 MediaRecorder에 전달됩니다.
-
-### Editor
-
-AI Storyboard를 Scene으로 변환한 뒤 필요한 장면만 세밀하게 수정합니다.
-
-- 직선 / 곡선 / 자유 path
-- 시작/끝 zoom
-- cursor
-- transition
-- 16:9 / 9:16 / 1:1
-- 720p / 1080p
-
-## URL capture
-
-공개 웹사이트는 Microlink browser capture API를 우선 사용합니다. 브라우저 함수는 1024-byte 제한 안에서 다음을 수집합니다.
-
-- viewport/document size
-- scrollX / scrollY
-- H1/H2/H3
-- navigation links
-- buttons / links
-- image / video / canvas / textarea
-- preview / browser-like product surfaces
-- element bounding rect
-- href / hash target coordinates
-
-Microlink 실패 시 mShots image fallback을 시도합니다. fallback은 DOM geometry가 없으므로 자동 연출 정확도는 낮아집니다.
-
-## Local verification
-
-Dependency 설치가 필요 없습니다.
+## 기본 사용
 
 ```bash
-node scripts/verify.mjs
+npm run dev
 ```
 
-검증에는 4개의 같은-document hash URL을 넣었을 때:
+브라우저에서 `http://localhost:5173` 접속 후 샘플 또는 자신의 파일을 넣고 `Run local test`를 누릅니다.
 
-- 4 chapters 유지
-- 11~16 cinematic beats로 압축
-- 3개의 chapter navigation 연결
-- #capture / #templates / #studio에서 각각 실제 viewport title 선택
-- offscreen root H1 재선택 방지
-- impact camera / sound / WebM 경로
+`npm install`은 필요하지 않습니다. 앱 코드는 정적이며 오픈소스 런타임/모델은 브라우저가 CDN에서 내려받습니다.
 
-가 포함됩니다.
+## Build
+
+```bash
+npm run check
+npm run build
+```
+
+`dist/`가 생성됩니다.
+
+## Local Core
+
+### Tesseract.js 7
+
+- `kor+eng` 언어
+- Original / Contrast / Threshold 3개 실제 파이프라인
+- `blocks` 출력으로 word bounding box 표시
+- 첫 실행 시 WASM 및 언어 데이터 다운로드
+
+### PDF.js
+
+- PDF를 브라우저에서 Canvas로 렌더링
+- 기본 비교에서는 최대 3페이지를 처리해 과도한 메모리 사용을 막음
+- 페이지 탐색 가능
+
+### Table / Document
+
+AI 없이도 기본 테스트가 되도록 OCR 결과에서 규칙 기반 후처리를 수행합니다.
+
+- Table: 공백/숫자 열 패턴으로 행·열 후보 추출 → Markdown
+- Document: 날짜, 금액, 전화, 이메일, URL, 숫자 값 → JSON
+
+이는 로컬 기본 기능이며, 복잡한 표/문서는 Cloud/Local AI를 추가하면 품질을 높일 수 있습니다.
+
+## Optional Local AI
+
+상단 `Local AI`에서 모델을 준비합니다.
+
+- `Xenova/vit-gpt2-image-captioning`: 브라우저 Image Caption
+- `Xenova/trocr-small-printed`: 영문 인쇄물 TrOCR
+
+Transformers.js는 WebGPU가 있으면 우선 사용하고, 아니면 WASM을 사용합니다. 모델은 수백 MB 이상일 수 있습니다.
+
+## Optional Cloud AI
+
+상단 톱니바퀴에서 OpenAI-compatible endpoint를 설정합니다.
+
+기본 예시 모델 ID:
+
+- `glm-ocr`
+- `deepseek-ocr-2`
+- `dots.mocr`
+- `qwen3.5-0.8b`
+
+Cloud 모델을 체크하기 전에는 파일이 외부로 전송되지 않습니다. 브라우저에서 외부 API를 직접 호출하므로 해당 API가 CORS를 허용해야 합니다. 비밀 API 키를 공개 GitHub Pages에서 장기간 보관해야 한다면 Serverless Proxy를 사용하세요.
 
 ## GitHub Pages
 
-1. 프로젝트 파일 전체를 repository root에 업로드합니다.
-2. `main` branch에 push합니다.
-3. GitHub → Settings → Pages → Source를 `GitHub Actions`로 지정합니다.
-4. 포함된 workflow가 검증 후 Pages artifact를 배포합니다.
+Repository를 만들고 이 프로젝트를 push한 뒤:
+
+1. `Settings → Pages`
+2. Source를 `GitHub Actions`로 선택
+3. `main` 브랜치에 push
+4. `.github/workflows/deploy.yml`가 `npm run check → npm run build → deploy-pages` 실행
+
+모든 내부 asset 경로는 상대 경로라 `https://USERNAME.github.io/REPOSITORY/`에서도 동작합니다.
+
+## 구조
 
 ```text
-https://USERNAME.github.io/REPOSITORY/
+/
+├─ index.html
+├─ src/
+│  ├─ config.js
+│  ├─ main.js
+│  ├─ styles.css
+│  ├─ engines/
+│  │  ├─ tesseract-engine.js
+│  │  ├─ pdf-engine.js
+│  │  ├─ transformers-engine.js
+│  │  └─ cloud-engine.js
+│  └─ utils/
+├─ public/
+│  ├─ sample-document.png
+│  ├─ favicon.svg
+│  ├─ manifest.webmanifest
+│  ├─ sw.js
+│  └─ 404.html
+├─ scripts/
+├─ .github/workflows/deploy.yml
+└─ README.md
 ```
 
-## Important limitation
+## 주의
 
-GitHub Pages 자체는 다른 origin의 DOM을 직접 읽을 수 없습니다. 공개 URL DOM geometry를 얻으려면 browser capture API가 필요합니다. 로그인 session을 포함한 완전 자동 클릭/탐색까지 필요하면 capture 계층만 Playwright/Chromium serverless worker로 분리하는 것이 적합합니다.
+- “Tesseract confidence”는 Ground Truth 기반 정확도가 아닙니다.
+- 실제 정확도(CER/WER)를 표시하려면 정답 텍스트를 별도로 넣는 Benchmark 기능을 추가해야 합니다.
+- 브라우저 로컬 모델은 메모리/VRAM 한계가 있으므로 대형 모델은 순차 실행을 권장합니다.
+- PDF는 보안상 브라우저에서 렌더링 후 이미지로 처리합니다.
 
 ## License
 
-MIT
+VisionDeck 코드는 MIT. 사용되는 오픈소스 엔진/모델은 각 프로젝트/모델의 라이선스를 따릅니다.

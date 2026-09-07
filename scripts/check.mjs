@@ -1,6 +1,6 @@
-import fs from 'node:fs';
-const req=['index.html','src/main.js','src/styles.css','public/favicon.svg','public/sample-receipt.svg','public/manifest.webmanifest','.github/workflows/deploy.yml'];
-for(const p of req){if(!fs.existsSync(new URL(`../${p}`,import.meta.url)))throw new Error(`Missing ${p}`)}
-const html=fs.readFileSync(new URL('../index.html',import.meta.url),'utf8');
-for(const s of ['<title>','og:title','manifest.webmanifest','src/main.js'])if(!html.includes(s))throw new Error(`index.html missing ${s}`);
-console.log('VisionDeck check: OK');
+import { execFileSync } from 'node:child_process';
+import { readdirSync, statSync } from 'node:fs';
+import { join } from 'node:path';
+const files=[];function walk(dir){for(const n of readdirSync(dir)){const p=join(dir,n);if(statSync(p).isDirectory())walk(p);else if(/\.js$|\.mjs$/.test(p))files.push(p)}}walk('src');walk('scripts');
+for(const f of files)execFileSync(process.execPath,['--check',f],{stdio:'inherit'});
+console.log(`Checked ${files.length} JavaScript files.`);
