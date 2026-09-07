@@ -1,0 +1,77 @@
+<!doctype html>
+<html lang="ko" data-theme="dark">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="theme-color" content="#0b1020" />
+  <meta name="description" content="PDF·사진·스크린샷·영상을 여러 Vision/OCR 모델에 동시에 비교하고 가장 적합한 결과를 찾는 Vision AI 워크벤치" />
+  <meta name="color-scheme" content="light dark" />
+  <link rel="canonical" href="__SITE_URL__" />
+  <link rel="icon" href="./favicon.svg" type="image/svg+xml" />
+  <link rel="icon" href="./favicon-32x32.png" sizes="32x32" type="image/png" />
+  <link rel="apple-touch-icon" href="./apple-touch-icon.png" />
+  <link rel="manifest" href="./manifest.webmanifest" />
+  <link rel="stylesheet" href="./src/styles/global.css" />
+  <meta property="og:type" content="website" />
+  <meta property="og:site_name" content="VisionDeck" />
+  <meta property="og:title" content="VisionDeck — Vision/OCR Model Comparator" />
+  <meta property="og:description" content="PDF·사진·Screenshot·영상을 끌어놓고 여러 최신 Vision/OCR AI 결과를 같은 화면에서 비교하세요." />
+  <meta property="og:url" content="__SITE_URL__" />
+  <meta property="og:image" content="__SITE_URL__og-image.png" />
+  <meta name="twitter:card" content="summary_large_image" />
+  <meta name="twitter:title" content="VisionDeck — Vision/OCR Model Comparator" />
+  <meta name="twitter:description" content="한 파일을 여러 Vision/OCR 모델로 동시에 읽고 결과·속도·비용을 비교하는 워크벤치" />
+  <meta name="twitter:image" content="__SITE_URL__og-image.png" />
+  <title>VisionDeck — Vision/OCR Model Comparator</title>
+  <script type="application/ld+json">{"@context":"https://schema.org","@type":"SoftwareApplication","name":"VisionDeck","applicationCategory":"DeveloperApplication","operatingSystem":"Web","description":"Vision/OCR model comparison workbench for PDFs, images, screenshots, and videos."}</script>
+</head>
+<body>
+  <svg class="svg-sprite" aria-hidden="true">
+    <symbol id="i-chevron" viewBox="0 0 24 24"><path d="m7 10 5 5 5-5"/></symbol>
+    <symbol id="i-sun" viewBox="0 0 24 24"><circle cx="12" cy="12" r="4"/><path d="M12 2v2M12 20v2M4.93 4.93l1.42 1.42M17.66 17.66l1.41 1.41M2 12h2M20 12h2M4.93 19.07l1.42-1.42M17.66 6.34l1.41-1.41"/></symbol>
+    <symbol id="i-moon" viewBox="0 0 24 24"><path d="M20.5 14.4A8.5 8.5 0 0 1 9.6 3.5 8.5 8.5 0 1 0 20.5 14.4Z"/></symbol>
+    <symbol id="i-settings" viewBox="0 0 24 24"><circle cx="12" cy="12" r="3"/><path d="M19.4 15a1.7 1.7 0 0 0 .34 1.88l.06.06-2.83 2.83-.06-.06A1.7 1.7 0 0 0 15 19.4a1.7 1.7 0 0 0-1 .6 1.7 1.7 0 0 0-.4 1.1V21h-4v-.09a1.7 1.7 0 0 0-1.07-1.56 1.7 1.7 0 0 0-1.88.34l-.06.06-2.83-2.83.06-.06A1.7 1.7 0 0 0 4.6 15a1.7 1.7 0 0 0-.6-1 1.7 1.7 0 0 0-1.1-.4H3v-4h.09a1.7 1.7 0 0 0 1.56-1.07 1.7 1.7 0 0 0-.34-1.88l-.06-.06 2.83-2.83.06.06A1.7 1.7 0 0 0 9 4.6a1.7 1.7 0 0 0 1-.6 1.7 1.7 0 0 0 .4-1.1V3h4v.09a1.7 1.7 0 0 0 1.07 1.56 1.7 1.7 0 0 0 1.88-.34l.06-.06 2.83 2.83-.06.06A1.7 1.7 0 0 0 19.4 9c.14.36.35.68.6 1 .27.3.66.45 1.06.4H21v4h-.09a1.7 1.7 0 0 0-1.51.6Z"/></symbol>
+    <symbol id="i-upload" viewBox="0 0 24 24"><path d="M12 16V4m0 0-4 4m4-4 4 4"/><path d="M20 15v4a2 2 0 0 1-2 2H6a2 2 0 0 1-2-2v-4"/></symbol>
+    <symbol id="i-reset" viewBox="0 0 24 24"><path d="M3 12a9 9 0 1 0 3-6.7L3 8"/><path d="M3 3v5h5"/></symbol>
+    <symbol id="i-spark" viewBox="0 0 24 24"><path d="m12 3 1.4 4.6L18 9l-4.6 1.4L12 15l-1.4-4.6L6 9l4.6-1.4L12 3Z"/><path d="m19 15 .7 2.3L22 18l-2.3.7L19 21l-.7-2.3L16 18l2.3-.7L19 15Z"/></symbol>
+    <symbol id="i-play" viewBox="0 0 24 24"><path d="m8 5 11 7-11 7V5Z"/></symbol>
+    <symbol id="i-compare" viewBox="0 0 24 24"><path d="M8 7h11m0 0-3-3m3 3-3 3M16 17H5m0 0 3-3m-3 3 3 3"/></symbol>
+    <symbol id="i-scan" viewBox="0 0 24 24"><path d="M4 7V4h3M17 4h3v3M20 17v3h-3M7 20H4v-3M7 12h10"/></symbol>
+    <symbol id="i-cross" viewBox="0 0 24 24"><circle cx="12" cy="12" r="5"/><path d="M12 2v5M12 17v5M2 12h5M17 12h5"/></symbol>
+    <symbol id="i-minus" viewBox="0 0 24 24"><circle cx="11" cy="11" r="7"/><path d="M8 11h6M16 16l5 5"/></symbol>
+    <symbol id="i-plus" viewBox="0 0 24 24"><circle cx="11" cy="11" r="7"/><path d="M8 11h6M11 8v6M16 16l5 5"/></symbol>
+    <symbol id="i-copy" viewBox="0 0 24 24"><rect x="9" y="9" width="11" height="11" rx="2"/><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/></symbol>
+    <symbol id="i-close" viewBox="0 0 24 24"><path d="m6 6 12 12M18 6 6 18"/></symbol>
+    <symbol id="i-bolt" viewBox="0 0 24 24"><path d="m13 2-9 12h8l-1 8 9-12h-8l1-8Z"/></symbol>
+  </svg>
+  <div class="app-shell">
+    <header class="topbar">
+      <div class="brand" aria-label="VisionDeck"><svg class="brand-mark" viewBox="0 0 40 40" aria-hidden="true"><rect x="3" y="4" width="34" height="32" rx="8" fill="currentColor" opacity=".12"/><path d="M10 12.5h20M10 20h20M10 27.5h12" stroke="currentColor" stroke-width="2.4" stroke-linecap="round"/><circle cx="28" cy="27.5" r="4.5" fill="currentColor"/><path d="m31.4 30.8 4 4" stroke="currentColor" stroke-width="2.4" stroke-linecap="round"/></svg><span class="brand-copy"><strong>VisionDeck</strong><span>Visual AI Workbench</span></span></div>
+      <div class="topbar-center"><button class="workspace-name">Receipt benchmark <svg><use href="#i-chevron"/></svg></button></div>
+      <nav class="topbar-actions" aria-label="전역 메뉴"><span id="modeBadge" class="mode-badge">DEMO</span><button id="themeButton" class="icon-button" aria-label="테마 전환" title="테마 전환"><svg><use href="#i-sun"/></svg></button><a class="icon-button" href="https://github.com/" target="_blank" rel="noreferrer" aria-label="GitHub" title="GitHub"><span class="github-mark">GH</span></a><button id="settingsButton" class="icon-button" aria-label="Gateway 설정" title="Gateway 설정"><svg><use href="#i-settings"/></svg></button></nav>
+    </header>
+
+    <main class="workspace">
+      <aside class="left-rail">
+        <section class="rail-section"><div class="section-heading"><span>INPUT</span><button id="resetButton" class="icon-button tiny" title="초기화"><svg><use href="#i-reset"/></svg></button></div><div id="dropContainer"></div></section>
+        <section class="rail-section"><div class="section-heading"><span>AUTO ROUTER</span></div><label class="toggle-row"><span><strong>자동 모델 선택</strong><small id="routeLabel">Unknown input</small></span><input id="autoRouterToggle" type="checkbox" checked><span class="switch"></span></label><div class="router-card"><span class="router-icon"><svg><use href="#i-spark"/></svg></span><div><strong id="routeKind">OCR</strong><p id="routeReason">파일 형식을 확정하지 못해 범용 OCR 비교 구성을 적용했습니다.</p></div></div></section>
+        <section class="rail-section grow"><div class="section-heading"><span>MODELS</span><span id="selectedCount">3 selected</span></div><div id="modelList" class="model-list"></div></section>
+        <section class="rail-section rail-footer"><label class="toggle-row compact"><span><strong>Consensus mode</strong><small>다른 부분을 다시 비교</small></span><input id="consensusToggle" type="checkbox" checked><span class="switch"></span></label></section>
+      </aside>
+
+      <section class="center-stage">
+        <div class="stage-topline"><div id="tabs" class="tabs" role="tablist" aria-label="분석 모드"></div><div class="run-actions"><div class="model-selector-wrap"><button id="modelSelectorButton" class="button secondary compact-button"><svg><use href="#i-compare"/></svg><span id="modelSelectorLabel">3 models</span><svg><use href="#i-chevron"/></svg></button><div id="modelMenu" class="model-menu" hidden></div></div><button id="runButton" class="button primary"><svg><use href="#i-play"/></svg><span>Run comparison</span></button></div></div>
+        <div class="canvas-area"><section class="preview-shell" aria-label="원본 미리보기"><div class="panel-toolbar"><div><strong>Source</strong><span id="sourceLabel">샘플 영수증</span></div><div class="toolbar-actions"><button id="boxButton" class="icon-button is-active" title="Bounding Box 표시"><svg><use href="#i-scan"/></svg></button><button id="selectionButton" class="icon-button" title="선택 영역 모드"><svg><use href="#i-cross"/></svg></button><span class="toolbar-divider"></span><button id="zoomOutButton" class="icon-button" title="축소"><svg><use href="#i-minus"/></svg></button><span id="zoomValue" class="zoom-value">100%</span><button id="zoomInButton" class="icon-button" title="확대"><svg><use href="#i-plus"/></svg></button></div></div><div id="previewStage" class="preview-stage"><div id="previewTransform" class="preview-transform"></div></div></section></div>
+      </section>
+
+      <aside class="right-panel"><div class="right-panel-header"><div><span class="eyeline">MODEL OUTPUT</span><h2 id="resultTitle">OCR results</h2></div><span class="analysis-state"><svg><use href="#i-bolt"/></svg><span id="analysisState">Ready</span></span></div><div id="rightPanelScroll" class="right-panel-scroll"></div><div class="privacy-note">업로드 파일은 브라우저에서 미리보기됩니다. Live 모드에서만 설정한 Gateway로 전송됩니다.</div></aside>
+    </main>
+
+    <footer class="statusbar"><span><i class="status-light"></i>Gateway: <span id="gatewayStatus">Demo sandbox</span></span><span id="featureStatus">Auto Router ON · Consensus ON</span><span>VisionDeck 1.0</span></footer>
+  </div>
+
+  <div id="settingsBackdrop" class="modal-backdrop" hidden><section class="modal" role="dialog" aria-modal="true" aria-labelledby="settingsTitle"><header><div><h2 id="settingsTitle">Gateway settings</h2><p>키는 메모리에서만 사용하며 LocalStorage에 저장하지 않습니다.</p></div><button id="settingsClose" class="icon-button" aria-label="설정 닫기"><svg><use href="#i-close"/></svg></button></header><div class="mode-switch" role="group" aria-label="실행 모드"><button id="demoModeButton" class="is-active">Demo mode</button><button id="liveModeButton">Live Gateway</button></div><label class="field"><span>OpenAI-compatible endpoint</span><input id="endpointInput" value="https://gateway.vlm.run/v1/openai" spellcheck="false"></label><label class="field"><span>API key <small>(anonymous alpha에서는 비워둘 수 있음)</small></span><input id="apiKeyInput" type="password" placeholder="세션에만 유지" autocomplete="off"></label><label class="field"><span>Remote document/image URL <small>(PDF·video Live mode용)</small></span><input id="remoteUrlInput" placeholder="https://.../document.pdf" spellcheck="false"></label><div class="security-callout"><strong>GitHub Pages 보안 원칙</strong><p>정적 프론트엔드에 비밀 API 키를 하드코딩하지 않습니다. 민감한 인증이 필요한 배포는 Serverless Proxy를 사용하세요.</p></div><a class="text-link" href="https://docs.vlm.run/gateway" target="_blank" rel="noreferrer">VLM Run Gateway 문서 ↗</a><footer><button id="settingsDone" class="button secondary">닫기</button></footer></section></div>
+  <div id="toastStack" class="toast-stack" aria-live="polite"></div>
+  <script type="module" src="./src/main.js"></script>
+</body>
+</html>
